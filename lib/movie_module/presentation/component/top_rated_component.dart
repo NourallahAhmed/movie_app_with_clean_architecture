@@ -16,6 +16,7 @@ class TopRatedComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  BlocBuilder<MoviesBloc , MoviesState>(
+      buildWhen: (pre , current) =>  pre.topRatedState != current.topRatedState,
 
     builder: (context , state){
       switch(state.topRatedState){

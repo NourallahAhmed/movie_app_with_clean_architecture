@@ -33,6 +33,4 @@ class Movie  extends Equatable{
     }
   ];
 
-  @override
-  bool? get stringify => true;
 }

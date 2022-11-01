@@ -4,6 +4,6 @@ class Failure {
   const Failure(this.message);
 }
 
-class ServerFailure extends Failure{
+class ServerFailure extends Failure {
   ServerFailure(super.message);
 }

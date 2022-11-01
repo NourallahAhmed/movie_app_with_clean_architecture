@@ -1,14 +1,13 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../core/error/failure.dart';
-import '../../data/repository/MovieRepository.dart';
 import '../entites/movie.dart';
 import '../repository/BaseRepository.dart';
 
-class GetNowPlayingMovies{
+class GetNowPlayingMoviesUseCase{
 
   BaseMovieRepository baseRepository;
-  GetNowPlayingMovies(this.baseRepository);
+  GetNowPlayingMoviesUseCase(this.baseRepository);
 
 
   Future<Either<Failure ,List<Movie>>> getNowPlayingMovies() async{

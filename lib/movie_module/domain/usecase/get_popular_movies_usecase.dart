@@ -5,12 +5,12 @@ import '../../data/repository/MovieRepository.dart';
 import '../entites/movie.dart';
 import '../repository/BaseRepository.dart';
 
-class GetPopularMovies{
+class GetPopularMoviesUseCase{
 
   BaseMovieRepository baseRepository;
 
 
-  GetPopularMovies(this.baseRepository);
+  GetPopularMoviesUseCase(this.baseRepository);
 
 
   Future<Either<Failure ,List<Movie>>>getPopularMovies() async {

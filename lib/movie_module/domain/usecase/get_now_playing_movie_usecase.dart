@@ -5,7 +5,7 @@ import '../../../core/error/failure.dart';
 import '../entites/movie.dart';
 import '../repository/BaseRepository.dart';
 
-class GetNowPlayingMoviesUseCase extends BaseUseCase<Movie>{
+class GetNowPlayingMoviesUseCase extends BaseUseCase<List<Movie> , NoParameters>{
 
   BaseMovieRepository baseRepository;
   GetNowPlayingMoviesUseCase(this.baseRepository);
@@ -15,7 +15,7 @@ class GetNowPlayingMoviesUseCase extends BaseUseCase<Movie>{
   /// the call function will be called directly when the constructor is created
   /// build abstract class to save the function name (( to apply the contract))
   @override
-  Future<Either<Failure, List<Movie>>> call() async{
+  Future<Either<Failure, List<Movie>>> call(NoParameters noParameters) async{
     return await baseRepository.getNowPlayingMovies();
   }
 

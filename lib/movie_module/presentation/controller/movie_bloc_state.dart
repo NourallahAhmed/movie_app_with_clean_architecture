@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/enums.dart';
+import 'package:movie_app/movie_module/domain/entites/movie_details.dart';
 
 import '../../domain/entites/movie.dart';
 
@@ -20,6 +21,8 @@ class MoviesState extends Equatable {
   final String topRatedMessage;
   final RequestState topRatedState;
 
+
+
   const MoviesState({
     this.nowPlayingMovies = const [],
     this.nowPlayingMessage = "",
@@ -30,6 +33,9 @@ class MoviesState extends Equatable {
     this.topRatedMovies = const [],
     this.topRatedMessage = "",
     this.topRatedState = RequestState.loading,
+    // this.moviesDetails = const MovieDetails(),
+    // this.moviesDetailsMessage = "",
+    // this.moviesDetailsState = RequestState.loading,
   });
 
 

@@ -1,7 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:movie_app/movie_module/domain/entites/movie_details.dart';
+import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
 
 import '../../../core/error/failure.dart';
 import '../entites/movie.dart';
+import '../usecase/get_movie_details_usecase.dart';
+import '../usecase/get_movie_recommendations_usecase.dart';
 
 abstract class BaseMovieRepository{
 
@@ -14,6 +18,14 @@ abstract class BaseMovieRepository{
 
   //todo top rated
   Future<Either<Failure ,List<Movie>>> getTopRatedMovies();
+
+
+
+  //todo movieDetails
+  Future<Either<Failure ,MovieDetails>> getMovieDetails( MovieDetailsParameters movieDetailsParameters);
+
+  //todo movieRecomendation
+  Future<Either<Failure , List<MovieRecomendation>>> getMovieRecomendation( MovieRecomendationParameters movieRecomendationParameters);
 
   
 

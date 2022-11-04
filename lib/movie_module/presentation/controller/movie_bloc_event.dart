@@ -20,3 +20,4 @@ class GetTopRatedMovieEvent extends MoviesEvents{
 class GetPopularMovieEvent extends MoviesEvents{
 
 }
+

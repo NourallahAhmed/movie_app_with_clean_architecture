@@ -11,6 +11,6 @@ class ApiConstants{
   static String imageUrl(String path ) => "${baseImageURL}${path}";
   static String detailsUrl(int movieID ) => "${baseURL}${baseMovieDetailsUrl}${movieID}?api_key=${apiKey}";
   static String recommendationsUrl(int movieID ) => "${baseURL}${baseMovieDetailsUrl}${movieID}/recommendations?api_key=${apiKey}";
-
+  static String getMovieProviders(int movieID) => "${baseURL}${movieID}/watch/providers?api_key=${apiKey}";
 
 }

@@ -6,24 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/core/services/service_locator.dart';
 import 'package:movie_app/core/utils/api_constants.dart';
 import 'package:movie_app/core/utils/enums.dart';
-import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
-import 'package:movie_app/movie_module/presentation/component/recommendation_component.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_details_bloc.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../../core/utils/dummy (1).dart';
 import '../../domain/entites/genres.dart';
-import '../../domain/entites/movie_details.dart';
-
-
-
-
-
-
-
-
-
-
-
 
 
 class MovieDetailScreen extends StatelessWidget {
@@ -128,6 +113,7 @@ class MovieDetailContent extends StatelessWidget {
                                  style: const TextStyle(
                                    fontSize: 16.0,
                                    fontWeight: FontWeight.w500,
+                                   color: Colors.white
                                  ),
                                ),
                              ),
@@ -160,13 +146,21 @@ class MovieDetailContent extends StatelessWidget {
                                ],
                              ),
                              const SizedBox(width: 16.0),
-                             Text(
-                               _showDuration(state.moviesDetails!.runTime),
-                               style: const TextStyle(
-                                 color: Colors.white70,
-                                 fontSize: 16.0,
-                                 fontWeight: FontWeight.w500,
-                                 letterSpacing: 1.2,
+                             Container(
+                               padding: EdgeInsets.all(0.9),
+                               decoration: BoxDecoration(
+                                 color: Colors.grey[800],
+                                 borderRadius: BorderRadius.circular(4.0),
+                               ),
+                               child: Text(
+
+                                 _showDuration(state.moviesDetails!.runTime),
+                                 style: const TextStyle(
+                                   color: Colors.white,
+                                   fontSize: 16.0,
+                                   fontWeight: FontWeight.w500,
+                                   letterSpacing: 1.2,
+                                 ),
                                ),
                              ),
                            ],
@@ -201,13 +195,37 @@ class MovieDetailContent extends StatelessWidget {
                    child: FadeInUp(
                      from: 20,
                      duration: const Duration(milliseconds: 500),
-                     child: Text(
-                       'More like this'.toUpperCase(),
-                       style: const TextStyle(
-                         fontSize: 16.0,
-                         fontWeight: FontWeight.w500,
-                         letterSpacing: 1.2,
-                       ),
+                     child: Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                         GestureDetector(
+                           child: Text(
+                             'Recommendations'.toUpperCase(),
+                             style: const TextStyle(
+                               fontSize: 16.0,
+                               fontWeight: FontWeight.w500,
+                               letterSpacing: 1.2,
+                             ),
+                           ),
+                           onTap: (){
+                             //TODO: change the similar to recomendations
+
+                           },
+                         ),
+                         GestureDetector(
+                           child: Text(
+                             'Similar'.toUpperCase(),
+                             style: const TextStyle(
+                               fontSize: 16.0,
+                               fontWeight: FontWeight.w500,
+                               letterSpacing: 1.2,
+                             ),
+                           ),
+                           onTap: (){
+                             //TODO: change the recomendation to similar
+                           },
+                         ),
+                       ],
                      ),
                    ),
                  ),
@@ -216,7 +234,7 @@ class MovieDetailContent extends StatelessWidget {
 
                 SliverPadding(
                  padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
-                 sliver: state.moviesRecomendationsState == RequestState.loaded ?  Recomendations() : CircularProgressIndicator(),
+                 sliver:  _showRecommendations()//Recomendations()
                ),
              ],
            );
@@ -255,65 +273,40 @@ class MovieDetailContent extends StatelessWidget {
 
 
 
-  //
-  // Widget _showRecommendations() {
-  //   return BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
-  //       builder: (context, state) {
-  //     // switch (state.moviesRecomendationsState) {
-  //     //   case RequestState.loading:
-  //     //     return  Center(child: CircularProgressIndicator());
-  //     //   case RequestState.loaded:
-  //         print(state.moviesRecomendations);
-  //         print(state.moviesRecomendationsState);
-  //
-  //         return SliverGrid(
-  //           delegate: SliverChildBuilderDelegate(
-  //             (context, index) {
-  //               final recommendation = state.moviesRecomendations[index];
-  //               return FadeInUp(
-  //                 from: 20,
-  //                 duration: const Duration(milliseconds: 500),
-  //                 child: ClipRRect(
-  //                   borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-  //                   child: CachedNetworkImage(
-  //                     imageUrl: ApiConstants.imageUrl(recommendation.path),
-  //                     placeholder: (context, url) => Shimmer.fromColors(
-  //                       baseColor: Colors.grey[850]!,
-  //                       highlightColor: Colors.grey[800]!,
-  //                       child: Container(
-  //                         height: 170.0,
-  //                         width: 120.0,
-  //                         decoration: BoxDecoration(
-  //                           color: Colors.black,
-  //                           borderRadius: BorderRadius.circular(8.0),
-  //                         ),
-  //                       ),
-  //                     ),
-  //                     errorWidget: (context, url, error) =>
-  //                         const Icon(Icons.error),
-  //                     height: 180.0,
-  //                     fit: BoxFit.cover,
-  //                   ),
-  //                 ),
-  //               );
-  //             },
-  //             childCount: state.moviesRecomendations.length,
-  //           ),
-  //           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-  //             mainAxisSpacing: 8.0,
-  //             crossAxisSpacing: 8.0,
-  //             childAspectRatio: 0.7,
-  //             crossAxisCount: 3,
-  //           ),
-  //         );
-  //     //   case RequestState.error:
-  //     //     return SizedBox(
-  //     //       height: 400,
-  //     //       child: Center(child: Text(state.moviesRecomendationsMessage)),
-  //     //     );
-  //     // }
-  //   });
-  // }
+
+  Widget _showRecommendations() {
+    return BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
+        builder: (context, state) {
+          return SliverGrid(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final recommendation = state.moviesRecomendations[index];
+
+                return
+                    GestureDetector(
+                      child: CachedNetworkImage(
+                        height: 560.0,
+                        imageUrl: ApiConstants.imageUrl(recommendation.path ?? recommendation.secondPath),
+                        fit: BoxFit.cover,
+                      ),
+                      onTap: (){
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(id: recommendation.id)));
+                      },
+                    );
+
+              },
+              childCount: state.moviesRecomendations.length,
+            ),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: 8.0,
+              crossAxisSpacing: 8.0,
+              childAspectRatio: 0.7,
+              crossAxisCount: 3,
+            ),
+          );
+
+    });
+  }
 }
 
 

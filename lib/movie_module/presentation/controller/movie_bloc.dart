@@ -9,13 +9,15 @@ import 'package:movie_app/movie_module/domain/usecase/get_top_rated_movies_useca
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc_event.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc_state.dart';
 
-import '../../domain/usecase/get_movie_details_usecase.dart';
+import '../../domain/usecase/get_movie_similar_usecase.dart';
 import '../../domain/usecase/get_popular_movies_usecase.dart';
+import '../../domain/usecase/get_upcoming_movie_usecase.dart';
 
 class MoviesBloc extends Bloc<MoviesEvents, MoviesState> {
   GetNowPlayingMoviesUseCase getNowPlayingMoviesUseCase;
   GetPopularMoviesUseCase getPopularMoviesUseCase;
   GetTopRatedMoviesUseCase getTopRatedMoviesUseCase;
+  GetUpComingMovieUseCase getUpComingMovieUseCase;
 
 
 
@@ -23,7 +25,7 @@ class MoviesBloc extends Bloc<MoviesEvents, MoviesState> {
     this.getNowPlayingMoviesUseCase,
     this.getPopularMoviesUseCase,
     this.getTopRatedMoviesUseCase,
-
+      this.getUpComingMovieUseCase
   ) : super(const MoviesState()) {
     //add events using On
 
@@ -36,6 +38,12 @@ class MoviesBloc extends Bloc<MoviesEvents, MoviesState> {
 
     //topRated
     on<GetTopRatedMovieEvent>(_getTopRatedMovie);
+
+
+    on<GetUpComingEvent>(_getUpComingMovie);
+
+
+
 
 
   }
@@ -85,4 +93,19 @@ class MoviesBloc extends Bloc<MoviesEvents, MoviesState> {
 
 
 
+
+  FutureOr<void> _getUpComingMovie(GetUpComingEvent event, Emitter<MoviesState> emit) async {
+    //emit make the new state to the ui
+    //function call() will be called automatically
+    print(("getupcomingMovie__Bloc"));
+    final result = await getUpComingMovieUseCase(const NoParameters());
+
+    print(result);
+    result.fold(
+          (l) => emit(state.copyWith(
+          upcomingState: RequestState.error, upcomingMessage: l.message)),
+          (r) => emit(state.copyWith(
+          upcomingState: RequestState.loaded, upcomingMovies: r)),
+    );
+  }
 }

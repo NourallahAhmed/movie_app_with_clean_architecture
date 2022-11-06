@@ -4,9 +4,11 @@ import 'package:movie_app/movie_module/data/datasource/remote_data_source.dart';
 import 'package:movie_app/movie_module/domain/entites/movie.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_details.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
+import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
 import 'package:movie_app/movie_module/domain/repository/BaseRepository.dart';
 
 import 'package:dartz/dartz.dart';
+import 'package:movie_app/movie_module/domain/usecase/get_movie_similar_usecase.dart';
 
 import '../../domain/usecase/get_movie_details_usecase.dart';
 import '../../domain/usecase/get_movie_recommendations_usecase.dart';
@@ -66,6 +68,27 @@ class MovieRepository implements BaseMovieRepository {
       print("movieRecomendationParameters");
       print(movieRecomendationParameters.movieId);
       return Right(await baseRemoteDataSource.getMoviesRecomendations(movieRecomendationParameters));
+    }
+    on ServiceExceptions catch (failure){
+    return Left(ServerFailure(failure.errorMessage.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<SimilarMovies>>> getSimilarMovie(MovieSimilarParameters movieSimilarParameters) async {
+    try {
+
+      return Right(await baseRemoteDataSource.getSimilarMovies(movieSimilarParameters));
+    }
+    on ServiceExceptions catch (failure){
+    return Left(ServerFailure(failure.errorMessage.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Movie>>> getUpComingMovies() async{
+    try {
+      return Right(await baseRemoteDataSource.getUpComingMovies());
     }
     on ServiceExceptions catch (failure){
     return Left(ServerFailure(failure.errorMessage.statusMessage));

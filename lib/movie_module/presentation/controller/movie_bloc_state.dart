@@ -21,6 +21,10 @@ class MoviesState extends Equatable {
   final String topRatedMessage;
   final RequestState topRatedState;
 
+  final List<Movie> upComingMovies;
+  final String upComingMessage;
+  final RequestState upComingState;
+
 
 
   const MoviesState({
@@ -33,9 +37,9 @@ class MoviesState extends Equatable {
     this.topRatedMovies = const [],
     this.topRatedMessage = "",
     this.topRatedState = RequestState.loading,
-    // this.moviesDetails = const MovieDetails(),
-    // this.moviesDetailsMessage = "",
-    // this.moviesDetailsState = RequestState.loading,
+    this.upComingMovies = const [],
+    this.upComingMessage = "",
+    this.upComingState = RequestState.loading,
   });
 
 
@@ -52,6 +56,9 @@ class MoviesState extends Equatable {
       List<Movie>? topRatedMovies,
       String? topRatedMessage,
       RequestState? topRatedState,
+      List<Movie>? upcomingMovies,
+      String? upcomingMessage,
+      RequestState?  upcomingState,
     }) {
       return MoviesState(
         nowPlayingMovies: nowPlayingMovies ?? this.nowPlayingMovies ,
@@ -63,6 +70,11 @@ class MoviesState extends Equatable {
         topRatedMovies: topRatedMovies ?? this.topRatedMovies,
         topRatedMessage: topRatedMessage ?? this.topRatedMessage,
         topRatedState : topRatedState ?? this.topRatedState,
+
+
+        upComingMovies: upcomingMovies ?? this.upComingMovies,
+        upComingMessage: upcomingMessage ?? this.upComingMessage,
+        upComingState : upcomingState ?? this.upComingState,
       );
     }
     @override
@@ -76,5 +88,8 @@ class MoviesState extends Equatable {
         topRatedMovies,
         topRatedMessage,
         topRatedState,
+        upComingState,
+        upComingMessage,
+        upComingMovies,
       ];
 }

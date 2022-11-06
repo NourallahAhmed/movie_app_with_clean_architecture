@@ -7,7 +7,6 @@ import 'package:movie_app/movie_module/presentation/controller/movie_bloc.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc_state.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/utils/api_constants.dart';
-import '../../../core/utils/dummy.dart';
 import '../../../core/utils/enums.dart';
 import '../screens/movie_detail_screen.dart';
 

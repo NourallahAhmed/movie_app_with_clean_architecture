@@ -10,6 +10,8 @@ import 'package:movie_app/movie_module/presentation/component/top_rated_componen
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc_event.dart';
 
+import '../component/upcoming_component.dart';
+
 
 class MainMoviesScreen extends StatelessWidget {
   const MainMoviesScreen({Key? key}) : super(key: key);
@@ -20,7 +22,8 @@ class MainMoviesScreen extends StatelessWidget {
       create: (BuildContext context) => serviceLocator<MoviesBloc>()
         ..add(GetNowPlayingMovieEvent())
         ..add(GetPopularMovieEvent())
-        ..add(GetTopRatedMovieEvent()),
+        ..add(GetTopRatedMovieEvent())
+        ..add(GetUpComingEvent()),
       child: Scaffold(
         // appBar: AppBar(title: Text("Movies")),
         body: SingleChildScrollView(
@@ -102,6 +105,45 @@ class MainMoviesScreen extends StatelessWidget {
                 ),
               ),
               const TopRatedComponent(),
+              Container(
+                margin: const EdgeInsets.fromLTRB(
+                  16.0,
+                  24.0,
+                  16.0,
+                  8.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "UpComing ",
+                      style: GoogleFonts.poppins(
+                        fontSize: 19,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 0.15,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        /// TODO : NAVIGATION TO Top Rated Movies Screen
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: const [
+                            Text('See More'),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16.0,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const UpComingComponent(),
               const SizedBox(height: 50.0),
             ],
           ),

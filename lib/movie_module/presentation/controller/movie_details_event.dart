@@ -26,3 +26,15 @@ class GetMovieRecomendationsEvent extends MovieDetailsEvent{
   List<Object?> get props => [id];
 
 }
+
+class GetSimilarMovieEvent extends MovieDetailsEvent{
+
+  final int id;
+
+  GetSimilarMovieEvent(this.id);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id];
+
+}

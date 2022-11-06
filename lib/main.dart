@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Movie App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+
       ),
       home:  MainMoviesScreen(),
     );

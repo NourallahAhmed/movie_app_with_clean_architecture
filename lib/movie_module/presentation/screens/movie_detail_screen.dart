@@ -5,10 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/core/services/service_locator.dart';
 import 'package:movie_app/core/utils/api_constants.dart';
+import 'package:movie_app/core/utils/app_constants.dart';
 import 'package:movie_app/core/utils/enums.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_details_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../domain/entites/genres.dart';
+import '../component/cast_component.dart';
 
 
 class MovieDetailScreen extends StatelessWidget {
@@ -21,11 +23,11 @@ class MovieDetailScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => serviceLocator<MovieDetailsBloc>()
         ..add(GetMovieDetailsEvent(id))
-        ..add(GetMovieRecomendationsEvent(id)),
+        ..add(GetMovieRecomendationsEvent(id))
+        ..add(GetSimilarMovieEvent(id)),
       child:
-         Scaffold(
-          body: MovieDetailContent(
-          ),
+         const Scaffold(
+          body: MovieDetailContent(),
         )
 
     );
@@ -49,6 +51,8 @@ class MovieDetailContent extends StatelessWidget {
            return CustomScrollView(
              key: const Key('movieDetailScrollView'),
              slivers: [
+
+
                SliverAppBar(
                  pinned: true,
                  expandedHeight: 250.0,
@@ -81,6 +85,8 @@ class MovieDetailContent extends StatelessWidget {
                    ),
                  ),
                ),
+
+
                SliverToBoxAdapter(
                  child: FadeInUp(
                    from: 20,
@@ -113,7 +119,7 @@ class MovieDetailContent extends StatelessWidget {
                                  style: const TextStyle(
                                    fontSize: 16.0,
                                    fontWeight: FontWeight.w500,
-                                   color: Colors.white
+                                   color: AppConstants.textColor,
                                  ),
                                ),
                              ),
@@ -141,6 +147,8 @@ class MovieDetailContent extends StatelessWidget {
                                      fontSize: 1.0,
                                      fontWeight: FontWeight.w500,
                                      letterSpacing: 1.2,
+
+                                     color: AppConstants.textColor,
                                    ),
                                  ),
                                ],
@@ -156,7 +164,7 @@ class MovieDetailContent extends StatelessWidget {
 
                                  _showDuration(state.moviesDetails!.runTime),
                                  style: const TextStyle(
-                                   color: Colors.white,
+                                   color: AppConstants.textColor,
                                    fontSize: 16.0,
                                    fontWeight: FontWeight.w500,
                                    letterSpacing: 1.2,
@@ -178,7 +186,7 @@ class MovieDetailContent extends StatelessWidget {
                          Text(
                            'Genres: ${_showGenres(state.moviesDetails!.genre)}',
                            style: const TextStyle(
-                             color: Colors.white70,
+                             color:AppConstants.titleColor,
                              fontSize: 12.0,
                              fontWeight: FontWeight.w500,
                              letterSpacing: 1.2,
@@ -189,54 +197,62 @@ class MovieDetailContent extends StatelessWidget {
                    ),
                  ),
                ),
+
+
+               SliverPadding(
+                 padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
+                 sliver: SliverToBoxAdapter(
+                   child: CastComponent()
+                 ),
+               ),
+
+
+
                SliverPadding(
                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
                  sliver: SliverToBoxAdapter(
                    child: FadeInUp(
                      from: 20,
                      duration: const Duration(milliseconds: 500),
-                     child: Row(
-                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                       children: [
-                         GestureDetector(
-                           child: Text(
-                             'Recommendations'.toUpperCase(),
-                             style: const TextStyle(
-                               fontSize: 16.0,
-                               fontWeight: FontWeight.w500,
-                               letterSpacing: 1.2,
-                             ),
-                           ),
-                           onTap: (){
-                             //TODO: change the similar to recomendations
-
-                           },
-                         ),
-                         GestureDetector(
-                           child: Text(
-                             'Similar'.toUpperCase(),
-                             style: const TextStyle(
-                               fontSize: 16.0,
-                               fontWeight: FontWeight.w500,
-                               letterSpacing: 1.2,
-                             ),
-                           ),
-                           onTap: (){
-                             //TODO: change the recomendation to similar
-                           },
-                         ),
-                       ],
+                     child:  Text(
+                       'Similar'.toUpperCase(),
+                       style: const TextStyle(
+                         fontSize: 16.0,
+                         fontWeight: FontWeight.w500,
+                         letterSpacing: 1.2,
+                       ),
                      ),
                    ),
                  ),
                ),
-               // Tab(text: 'More like this'.toUpperCase()),
 
-                SliverPadding(
-                 padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
-                 sliver:  _showRecommendations()//Recomendations()
+              SliverPadding(
+                  padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
+                  sliver: _showSimilar() //Recomendations()
+                  ),
+
+               SliverPadding(
+                 padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
+                 sliver: SliverToBoxAdapter(
+                   child: FadeInUp(
+                     from: 20,
+                     duration: const Duration(milliseconds: 500),
+                     child:  Text(
+                       'Recommendations'.toUpperCase(),
+                       style: const TextStyle(
+                         fontSize: 16.0,
+                         fontWeight: FontWeight.w500,
+                         letterSpacing: 1.2,
+                       ),
+                     ),
+                   ),
+                 ),
                ),
-             ],
+              SliverPadding(
+                  padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
+                  sliver: _showRecommendations() //Recomendations()
+                  ),
+            ],
            );
          case RequestState.error:
            return Center(
@@ -286,7 +302,7 @@ class MovieDetailContent extends StatelessWidget {
                     GestureDetector(
                       child: CachedNetworkImage(
                         height: 560.0,
-                        imageUrl: ApiConstants.imageUrl(recommendation.path ?? recommendation.secondPath),
+                        imageUrl: ApiConstants.imageUrl(recommendation.path),
                         fit: BoxFit.cover,
                       ),
                       onTap: (){
@@ -296,6 +312,41 @@ class MovieDetailContent extends StatelessWidget {
 
               },
               childCount: state.moviesRecomendations.length,
+            ),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: 8.0,
+              crossAxisSpacing: 8.0,
+              childAspectRatio: 0.7,
+              crossAxisCount: 3,
+            ),
+          );
+
+    });
+  }
+
+
+  Widget _showSimilar() {
+    return BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
+        builder: (context, state) {
+          return SliverGrid(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final recommendation = state.similarMovies[index];
+
+                return
+                    GestureDetector(
+                      child: CachedNetworkImage(
+                        height: 560.0,
+                        imageUrl: ApiConstants.imageUrl(recommendation.path),
+                        fit: BoxFit.cover,
+                      ),
+                      onTap: (){
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(id: recommendation.id)));
+                      },
+                    );
+
+              },
+              childCount: state.similarMovies.length,
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               mainAxisSpacing: 8.0,

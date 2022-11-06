@@ -1,13 +1,22 @@
 part of 'actor_movies_bloc.dart';
 
 @immutable
-class ActorMoviesEvent extends Equatable {
-  final int id;
-  const ActorMoviesEvent(this.id);
+
+abstract class ActorEvents extends Equatable{
+  ActorEvents();
 
   @override
-  // TODO: implement props
-  List<Object?> get props => [id];
+  List<Object> get props => [];
+}
+
+class ActorMoviesEvent extends ActorEvents {
+  final int id;
+   ActorMoviesEvent(this.id);
+
+}
+class ActorDetailsEvent extends ActorEvents {
+  final int id;
+   ActorDetailsEvent(this.id);
 
 }
 

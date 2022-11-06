@@ -44,6 +44,7 @@ dependencies:
   carousel_slider:
   google_fonts:
   shimmer:
+  readmore:
 dev_dependencies:
   flutter_test:
     sdk: flutter

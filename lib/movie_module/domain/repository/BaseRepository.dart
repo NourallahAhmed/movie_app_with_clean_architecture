@@ -5,6 +5,7 @@ import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
 
 import '../../../core/error/failure.dart';
+import '../entites/actor.dart';
 import '../entites/movie.dart';
 import '../usecase/get_actor_movies_usecase.dart';
 import '../usecase/get_movie_details_usecase.dart';
@@ -40,6 +41,7 @@ abstract class BaseMovieRepository{
 
   //todo get actor movies
   Future<Either<Failure ,List<Movie>>> getActorMovies( ActorDetailsParameters actorDetailsParameters);
+  Future<Either<Failure ,Actor>> getActorDetails( ActorDetailsParameters actorDetailsParameters);
 
 
   

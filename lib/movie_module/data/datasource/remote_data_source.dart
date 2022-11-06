@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:movie_app/core/error/Exceptions.dart';
 import 'package:movie_app/core/error_message_model/Error_Message_Model.dart';
 import 'package:movie_app/core/utils/api_constants.dart';
+import 'package:movie_app/movie_module/data/model/actor_model.dart';
 import 'package:movie_app/movie_module/data/model/credits_model.dart';
 import 'package:movie_app/movie_module/data/model/movie_recomendation.dart';
 import 'package:movie_app/movie_module/data/model/similar_movie_model.dart';
@@ -11,6 +12,7 @@ import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_actor_movies_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_details_usecase.dart';
 
+import '../../domain/entites/actor.dart';
 import '../../domain/entites/movie_recomendation.dart';
 import '../../domain/usecase/get_movie_recommendations_usecase.dart';
 import '../../domain/usecase/get_movie_similar_usecase.dart';
@@ -28,6 +30,8 @@ abstract class BaseRemoteDataSource{
   Future<List<MovieRecomendation>> getMoviesRecomendations(MovieRecomendationParameters movieRecomendationParameters);
   Future<List<SimilarMovies>> getSimilarMovies(MovieSimilarParameters movieSimilarParameters);
   Future<CreditsModel> getMovieCast(MovieDetailsParameters movieDetailsParameters);
+
+  Future<Actor> getActorDetails(ActorDetailsParameters actorDetailsParameters);
 }
 
 class RemoteDataSource implements BaseRemoteDataSource{
@@ -156,6 +160,19 @@ class RemoteDataSource implements BaseRemoteDataSource{
     if (response.statusCode == 200){
 
       return List<MovieModel>.from((response.data["cast"]).map((e) => MovieModel.fromJson(e)));
+    }
+    else{
+      throw ServiceExceptions(errorMessage: ErrorMessage.fromJson(response.data));
+    }
+  }
+
+  @override
+  Future<Actor> getActorDetails(ActorDetailsParameters actorDetailsParameters) async {
+    var response =  await Dio().get(ApiConstants.getActorDetails(actorDetailsParameters.actorId));
+
+    if (response.statusCode == 200){
+
+      return ActorModel.fromJson( response.data);
     }
     else{
       throw ServiceExceptions(errorMessage: ErrorMessage.fromJson(response.data));

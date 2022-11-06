@@ -10,6 +10,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../core/utils/api_constants.dart';
 import '../../../core/utils/enums.dart';
 import '../../domain/entites/cast.dart';
+import '../component/actor_bio_component.dart';
 import 'movie_detail_screen.dart';
 
 class ActorMoviesScreen extends StatelessWidget {
@@ -23,7 +24,8 @@ class ActorMoviesScreen extends StatelessWidget {
     return BlocProvider(
         create: (BuildContext context) =>
             serviceLocator<ActorMoviesBloc>()
-              ..add(ActorMoviesEvent(id)),
+              ..add(ActorMoviesEvent(id))
+        ..add(ActorDetailsEvent(id)),
         child: Scaffold(
           body: BlocBuilder<ActorMoviesBloc, ActorMoviesState>(
               buildWhen: (pre, current) =>
@@ -95,35 +97,10 @@ class ActorMoviesScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SliverToBoxAdapter(
-                              child: FadeInUp(
-                                from: 20,
-                                duration: const Duration(milliseconds: 500),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(cast.name!,
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 23,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 1.2,
-                                          )),
-                                      const SizedBox(height: 8.0),
 
-                                      Text(cast.department!,
-                                          style: TextStyle(
-                                            fontSize: 23,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 1.2,
-                                          )),
-
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                            //todo: bio
+                            ActorBioComponent(),
+                            //todo: MOVIES
                             SliverPadding(
                                 padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
                                 sliver: _showActorMovies() //Recomendations()
@@ -154,7 +131,7 @@ class ActorMoviesScreen extends StatelessWidget {
                   GestureDetector(
                     child: CachedNetworkImage(
                       height: 560.0,
-                      imageUrl: ApiConstants.imageUrl(movie.posterPath!),
+                      imageUrl: ApiConstants.imageUrl(movie.posterPath ?? ""),
                       fit: BoxFit.cover,
                     ),
                     onTap: (){

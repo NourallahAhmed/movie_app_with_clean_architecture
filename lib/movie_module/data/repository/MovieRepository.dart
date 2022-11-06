@@ -1,6 +1,7 @@
 import 'package:movie_app/core/error/Exceptions.dart';
 import 'package:movie_app/core/error/failure.dart';
 import 'package:movie_app/movie_module/data/datasource/remote_data_source.dart';
+import 'package:movie_app/movie_module/domain/entites/actor.dart';
 import 'package:movie_app/movie_module/domain/entites/credits.dart';
 import 'package:movie_app/movie_module/domain/entites/movie.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_details.dart';
@@ -111,6 +112,16 @@ class MovieRepository implements BaseMovieRepository {
   Future<Either<Failure, List<Movie>>> getActorMovies(ActorDetailsParameters actorDetailsParameters) async {
     try {
       return Right(await baseRemoteDataSource.getActorMovies(actorDetailsParameters));
+    }
+    on ServiceExceptions catch (failure){
+    return Left(ServerFailure(failure.errorMessage.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Actor>> getActorDetails(ActorDetailsParameters actorDetailsParameters) async {
+    try {
+      return Right(await baseRemoteDataSource.getActorDetails(actorDetailsParameters));
     }
     on ServiceExceptions catch (failure){
     return Left(ServerFailure(failure.errorMessage.statusMessage));

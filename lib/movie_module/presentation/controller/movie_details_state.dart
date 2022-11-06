@@ -15,6 +15,10 @@ class MovieDetailsState extends Equatable {
   final String similarMovieMessage;
   final RequestState similarMovieState;
 
+  final Credits? creditsMovies;
+  final String creditsMoviesMessage;
+  final RequestState creditsMoviesState;
+
   MovieDetailsState({
     this.moviesDetails,
     this.moviesDetailsMessage = "",
@@ -25,6 +29,9 @@ class MovieDetailsState extends Equatable {
     this.similarMovies = const [],
     this.similarMovieMessage = "",
     this.similarMovieState = RequestState.loading,
+    this.creditsMovies ,
+    this.creditsMoviesMessage = "",
+    this.creditsMoviesState = RequestState.loading
   });
 
   MovieDetailsState copyWith(
@@ -36,7 +43,12 @@ class MovieDetailsState extends Equatable {
       RequestState? moviesRecomendationsState,
       List<SimilarMovies>? similarMovies,
       String? similarMovieMessage,
-      RequestState? similarMovieState}) {
+      RequestState? similarMovieState,
+      Credits ? creditsMovie,
+        String? creditsMessage,
+        RequestState? creditsState,
+
+      }) {
     return MovieDetailsState(
         moviesDetails: moviesDetails ?? this.moviesDetails,
         moviesDetailsMessage: moviesDetailsMessage ?? this.moviesDetailsMessage,
@@ -48,7 +60,15 @@ class MovieDetailsState extends Equatable {
             moviesRecomendationsState ?? this.moviesRecomendationsState,
         similarMovieMessage: similarMovieMessage ?? this.similarMovieMessage,
         similarMovies: similarMovies ?? this.similarMovies,
-        similarMovieState: similarMovieState ?? this.similarMovieState);
+        similarMovieState: similarMovieState ?? this.similarMovieState,
+        creditsMovies:  creditsMovies ?? this.creditsMovies,
+        creditsMoviesMessage:  creditsMessage ?? this.creditsMoviesMessage,
+      creditsMoviesState:  creditsState ?? this.creditsMoviesState
+
+    );
+
+
+
   }
 
   @override
@@ -61,6 +81,9 @@ class MovieDetailsState extends Equatable {
         moviesRecomendations,
         similarMovieState,
         similarMovies,
-        similarMovieMessage
+        similarMovieMessage,
+        creditsMovies,
+    creditsMoviesState,
+    creditsMoviesMessage
       ];
 }

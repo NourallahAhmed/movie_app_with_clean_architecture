@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:movie_app/core/error/Exceptions.dart';
 import 'package:movie_app/core/error_message_model/Error_Message_Model.dart';
 import 'package:movie_app/core/utils/api_constants.dart';
+import 'package:movie_app/movie_module/data/model/credits_model.dart';
 import 'package:movie_app/movie_module/data/model/movie_recomendation.dart';
 import 'package:movie_app/movie_module/data/model/similar_movie_model.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
@@ -24,6 +25,7 @@ abstract class BaseRemoteDataSource{
   Future<MovieDetailsModel> getMoviesDetails(MovieDetailsParameters movieDetailsParameters);
   Future<List<MovieRecomendation>> getMoviesRecomendations(MovieRecomendationParameters movieRecomendationParameters);
   Future<List<SimilarMovies>> getSimilarMovies(MovieSimilarParameters movieSimilarParameters);
+  Future<CreditsModel> getMovieCast(MovieDetailsParameters movieDetailsParameters);
 }
 
 class RemoteDataSource implements BaseRemoteDataSource{
@@ -124,6 +126,20 @@ class RemoteDataSource implements BaseRemoteDataSource{
     if (response.statusCode == 200){
 
       return List<MovieModel>.from((response.data["results"]).map((e) => MovieModel.fromJson(e)));
+    }
+    else{
+      throw ServiceExceptions(errorMessage: ErrorMessage.fromJson(response.data));
+    }
+  }
+
+  @override
+  Future<CreditsModel> getMovieCast(MovieDetailsParameters movieDetailsParameters)async {
+    var response =  await Dio().get(ApiConstants.getCast(movieDetailsParameters.movieId));
+    print("getMovieCast");
+
+    if (response.statusCode == 200){
+
+      return CreditsModel.fromJson(response.data);
     }
     else{
       throw ServiceExceptions(errorMessage: ErrorMessage.fromJson(response.data));

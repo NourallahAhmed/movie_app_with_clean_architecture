@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:movie_app/movie_module/domain/usecase/get_movie_cast_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_details_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_recommendations_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_similar_usecase.dart';
@@ -21,7 +22,7 @@ class ServiceLocator{
     serviceLocator.registerFactory(() => MoviesBloc(serviceLocator(),serviceLocator(),serviceLocator() , serviceLocator()));
 
     //todo: MovieDetailsBloc
-    serviceLocator.registerFactory(() => MovieDetailsBloc(serviceLocator(),serviceLocator() , serviceLocator()));
+    serviceLocator.registerFactory(() => MovieDetailsBloc(serviceLocator(),serviceLocator() , serviceLocator() , serviceLocator()));
 
     //todo: RemoteDataSource
     serviceLocator.registerLazySingleton<BaseRemoteDataSource>(() =>  RemoteDataSource());
@@ -51,6 +52,8 @@ class ServiceLocator{
 
     //todo: GetUpComingUseCase
     serviceLocator.registerLazySingleton<GetUpComingMovieUseCase>(() =>  GetUpComingMovieUseCase(serviceLocator()));
+    //todo: GetCastUseCaser
+    serviceLocator.registerLazySingleton<GetMovieCastUseCase>(() =>  GetMovieCastUseCase(serviceLocator()));
   }
 
 }

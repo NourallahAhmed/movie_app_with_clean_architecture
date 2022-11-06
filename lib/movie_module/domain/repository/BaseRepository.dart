@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:movie_app/movie_module/domain/entites/credits.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_details.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
@@ -32,6 +33,7 @@ abstract class BaseMovieRepository{
   //todo movieRecomendation
   Future<Either<Failure , List<MovieRecomendation>>> getMovieRecomendation( MovieRecomendationParameters movieRecomendationParameters);
   Future<Either<Failure , List<SimilarMovies>>> getSimilarMovie( MovieSimilarParameters movieSimilarParameters);
+  Future<Either<Failure , Credits>> getCast( MovieDetailsParameters movieDetailsParameters);
 
   
 

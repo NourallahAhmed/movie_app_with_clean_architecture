@@ -37,4 +37,14 @@ class GetSimilarMovieEvent extends MovieDetailsEvent{
   // TODO: implement props
   List<Object?> get props => [id];
 
+}class GetMovieCastEvent extends MovieDetailsEvent{
+
+  final int id;
+
+  GetMovieCastEvent(this.id);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id];
+
 }

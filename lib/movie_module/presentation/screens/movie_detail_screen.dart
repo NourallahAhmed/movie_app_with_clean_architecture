@@ -24,7 +24,8 @@ class MovieDetailScreen extends StatelessWidget {
       create: (BuildContext context) => serviceLocator<MovieDetailsBloc>()
         ..add(GetMovieDetailsEvent(id))
         ..add(GetMovieRecomendationsEvent(id))
-        ..add(GetSimilarMovieEvent(id)),
+        ..add(GetSimilarMovieEvent(id))
+        ..add(GetMovieCastEvent(id)),
       child:
          const Scaffold(
           body: MovieDetailContent(),

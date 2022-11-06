@@ -4,8 +4,8 @@ import 'package:movie_app/movie_module/domain/entites/crew.dart';
 import 'cast.dart';
 
 class Credits extends Equatable{
-   List<Cast>? cast;
-   List<Crew>? crew;
+   List<Cast> cast;
+   List<Crew> crew;
 
    Credits({ required this.cast, required this.crew});
 

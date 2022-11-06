@@ -9,6 +9,7 @@ import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
 import 'package:movie_app/movie_module/domain/repository/BaseRepository.dart';
 
 import 'package:dartz/dartz.dart';
+import 'package:movie_app/movie_module/domain/usecase/get_actor_movies_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_similar_usecase.dart';
 
 import '../../domain/usecase/get_movie_details_usecase.dart';
@@ -100,6 +101,16 @@ class MovieRepository implements BaseMovieRepository {
   Future<Either<Failure, Credits>> getCast(MovieDetailsParameters movieDetailsParameters)async  {
     try {
       return Right(await baseRemoteDataSource.getMovieCast(movieDetailsParameters));
+    }
+    on ServiceExceptions catch (failure){
+    return Left(ServerFailure(failure.errorMessage.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Movie>>> getActorMovies(ActorDetailsParameters actorDetailsParameters) async {
+    try {
+      return Right(await baseRemoteDataSource.getActorMovies(actorDetailsParameters));
     }
     on ServiceExceptions catch (failure){
     return Left(ServerFailure(failure.errorMessage.statusMessage));

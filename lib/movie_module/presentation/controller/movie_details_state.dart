@@ -44,9 +44,9 @@ class MovieDetailsState extends Equatable {
       List<SimilarMovies>? similarMovies,
       String? similarMovieMessage,
       RequestState? similarMovieState,
-      Credits ? creditsMovie,
-        String? creditsMessage,
-        RequestState? creditsState,
+      Credits ? creditMovie,
+        String? creditMessage,
+        RequestState? creditState,
 
       }) {
     return MovieDetailsState(
@@ -61,9 +61,9 @@ class MovieDetailsState extends Equatable {
         similarMovieMessage: similarMovieMessage ?? this.similarMovieMessage,
         similarMovies: similarMovies ?? this.similarMovies,
         similarMovieState: similarMovieState ?? this.similarMovieState,
-        creditsMovies:  creditsMovies ?? this.creditsMovies,
-        creditsMoviesMessage:  creditsMessage ?? this.creditsMoviesMessage,
-      creditsMoviesState:  creditsState ?? this.creditsMoviesState
+        creditsMovies:  creditMovie ?? this.creditsMovies,
+        creditsMoviesMessage:  creditMessage ?? this.creditsMoviesMessage,
+      creditsMoviesState:  creditState ?? this.creditsMoviesState
 
     );
 

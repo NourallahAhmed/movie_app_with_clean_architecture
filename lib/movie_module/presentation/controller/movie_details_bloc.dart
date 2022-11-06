@@ -25,7 +25,7 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
       MovieDetailsBloc(this.getMovieDetailsUseCase,
   this.getMovieRecomendationsUseCase,
   this.getMovieSimilarUseCase,
-          this.getMovieCastUseCase
+   this.getMovieCastUseCase
   ):
   super(MovieDetailsState()) {
   on<GetMovieDetailsEvent>(_getMovieDetails);
@@ -88,13 +88,18 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
     final result = await getMovieCastUseCase(
         MovieDetailsParameters(event.id));
 
+
+    print("_getMovieCast");
+
+    print(result);
+
     result.fold((l) =>
         emit(state.copyWith(
-            creditsMessage: l.message,
-            creditsState: RequestState.error)),
-            (r) =>
+            creditMessage: l.message,
+            creditState: RequestState.error)),
+            (r)  =>
             emit(state.copyWith(
-                creditsState: RequestState.loaded,
-                creditsMovie: r)));
+                creditState: RequestState.loaded,
+                creditMovie: r)));
   }
 }

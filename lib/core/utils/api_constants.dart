@@ -7,6 +7,8 @@ class ApiConstants{
   static final popularMovies = "${ApiConstants.baseURL}movie/popular?api_key=${ApiConstants.apiKey}";
   static final topRatedMovies = "${ApiConstants.baseURL}movie/top_rated?api_key=${ApiConstants.apiKey}";
   static final baseImageURL = "https://image.tmdb.org/t/p/w500";
+  static String getActorMovies(int actorID) => "${baseURL}person/${actorID}/movie_credits?api_key=${apiKey}";
+  static String getActorDetails(int actorID) => "${baseURL}person/${actorID}?api_key=${apiKey}";
   static String imageUrl(String path ) => "${baseImageURL}${path}";
   static String detailsUrl(int movieID ) => "${baseURL}movie/${movieID}?api_key=${apiKey}";
   static String recommendationsUrl(int movieID ) => "${baseURL}movie/${movieID}/recommendations?api_key=${apiKey}";

@@ -18,7 +18,7 @@ class GetMovieCastUseCase extends BaseUseCase<Credits ,MovieDetailsParameters >{
   Future<Either<Failure, Credits>> call(MovieDetailsParameters movieDetailsParameters) async{
     print(movieDetailsParameters.movieId);
     var result =  await baseMovieRepository.getCast( movieDetailsParameters);
-    print("resultresult");
+    print("Cast result");
     print(result);
     return result;
   }

@@ -43,7 +43,7 @@ class ActorBioComponent extends StatelessWidget {
                         //       letterSpacing: 1.2,
                         //     )),
                         // const SizedBox(height: 8.0),
-                        Text("Born at the ${state.actorDetails?.placeOfBirth} in  ${state.actorDetails?.birthday} " ?? "",
+                        Text("Born at the ${state.actorDetails?.placeOfBirth ?? ""} in  ${state.actorDetails?.birthday ?? ""} " ?? "",
                             style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
@@ -51,7 +51,7 @@ class ActorBioComponent extends StatelessWidget {
                             )),
                         const SizedBox(height: 8.0),
 
-                        const Text("Bio :" ?? "",
+                        const Text("Bio :" ?? " ",
                             style:  TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,

@@ -7,11 +7,13 @@ import 'package:movie_app/movie_module/domain/entites/movie.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_details.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
+import 'package:movie_app/movie_module/domain/entites/social_media.dart';
 import 'package:movie_app/movie_module/domain/repository/BaseRepository.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_actor_movies_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_similar_usecase.dart';
+import 'package:movie_app/movie_module/domain/usecase/search_movie_usecase.dart';
 
 import '../../domain/usecase/get_movie_details_usecase.dart';
 import '../../domain/usecase/get_movie_recommendations_usecase.dart';
@@ -122,6 +124,28 @@ class MovieRepository implements BaseMovieRepository {
   Future<Either<Failure, Actor>> getActorDetails(ActorDetailsParameters actorDetailsParameters) async {
     try {
       return Right(await baseRemoteDataSource.getActorDetails(actorDetailsParameters));
+    }
+    on ServiceExceptions catch (failure){
+    return Left(ServerFailure(failure.errorMessage.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Movie>>> searchMovies(SearchParameters searchParameters) async {
+
+    print("searchMovie from repo");
+    try {
+      return Right(await baseRemoteDataSource.searchMovie(searchParameters));
+    }
+    on ServiceExceptions catch (failure){
+    return Left(ServerFailure(failure.errorMessage.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SocialMedia>> getSocialMediaIds(MovieDetailsParameters movieDetailsParameters) async{
+    try {
+      return Right(await baseRemoteDataSource.getSocialMediaIds(movieDetailsParameters));
     }
     on ServiceExceptions catch (failure){
     return Left(ServerFailure(failure.errorMessage.statusMessage));

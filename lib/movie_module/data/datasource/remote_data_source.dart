@@ -8,9 +8,11 @@ import 'package:movie_app/movie_module/data/model/actor_model.dart';
 import 'package:movie_app/movie_module/data/model/credits_model.dart';
 import 'package:movie_app/movie_module/data/model/movie_recomendation.dart';
 import 'package:movie_app/movie_module/data/model/similar_movie_model.dart';
+import 'package:movie_app/movie_module/data/model/socialMedia_model.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_actor_movies_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_details_usecase.dart';
+import 'package:movie_app/movie_module/domain/usecase/search_movie_usecase.dart';
 
 import '../../domain/entites/actor.dart';
 import '../../domain/entites/movie_recomendation.dart';
@@ -32,6 +34,10 @@ abstract class BaseRemoteDataSource{
   Future<CreditsModel> getMovieCast(MovieDetailsParameters movieDetailsParameters);
 
   Future<Actor> getActorDetails(ActorDetailsParameters actorDetailsParameters);
+
+  Future<List<MovieModel>> searchMovie(SearchParameters searchParameters);
+
+  Future<SocialMediaModel> getSocialMediaIds(MovieDetailsParameters movieDetailsParameters);
 }
 
 class RemoteDataSource implements BaseRemoteDataSource{
@@ -173,6 +179,37 @@ class RemoteDataSource implements BaseRemoteDataSource{
     if (response.statusCode == 200){
 
       return ActorModel.fromJson( response.data);
+    }
+    else{
+      throw ServiceExceptions(errorMessage: ErrorMessage.fromJson(response.data));
+    }
+  }
+
+  @override
+  Future<List<MovieModel>> searchMovie(SearchParameters searchParameters) async {
+    final url = ApiConstants.searchMovie(searchParameters.movieName);
+    print(url);
+    var response =  await Dio().get(url);
+  print("searchMovie");
+  print(response);
+    if (response.statusCode == 200){
+
+      return  List<MovieModel>.from(response.data["results"].map((e)=> MovieModel.fromJson(e))) ;
+    }
+    else{
+      throw ServiceExceptions(errorMessage: ErrorMessage.fromJson(response.data));
+    }
+  }
+
+  @override
+  Future<SocialMediaModel> getSocialMediaIds(MovieDetailsParameters movieDetailsParameters)async {
+    final url = ApiConstants.socialMediaMovieIds(movieDetailsParameters.movieId);
+    print(url);
+    var response =  await Dio().get(url);
+
+    if (response.statusCode == 200){
+
+      return  SocialMediaModel.fromJson( response.data) ;
     }
     else{
       throw ServiceExceptions(errorMessage: ErrorMessage.fromJson(response.data));

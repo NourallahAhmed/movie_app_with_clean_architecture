@@ -19,6 +19,11 @@ class MovieDetailsState extends Equatable {
   final String creditsMoviesMessage;
   final RequestState creditsMoviesState;
 
+
+  final SocialMedia? socialMediaMovies;
+  final String socialMediaMessage;
+  final RequestState socialMediaState;
+
   MovieDetailsState({
     this.moviesDetails,
     this.moviesDetailsMessage = "",
@@ -29,61 +34,72 @@ class MovieDetailsState extends Equatable {
     this.similarMovies = const [],
     this.similarMovieMessage = "",
     this.similarMovieState = RequestState.loading,
-    this.creditsMovies ,
+    this.creditsMovies,
     this.creditsMoviesMessage = "",
-    this.creditsMoviesState = RequestState.loading
+    this.creditsMoviesState = RequestState.loading,
+    this.socialMediaMovies,
+    this.socialMediaMessage = "",
+    this.socialMediaState = RequestState.loading,
   });
 
-  MovieDetailsState copyWith(
-      {MovieDetails? moviesDetails,
-      String? moviesDetailsMessage,
-      RequestState? moviesDetailsState,
-      List<MovieRecomendation>? movieRecomednations,
-      String? moviesRecomendationsMessage,
-      RequestState? moviesRecomendationsState,
-      List<SimilarMovies>? similarMovies,
-      String? similarMovieMessage,
-      RequestState? similarMovieState,
-      Credits ? creditMovie,
-        String? creditMessage,
-        RequestState? creditState,
+  MovieDetailsState copyWith({MovieDetails? moviesDetails,
+    String? moviesDetailsMessage,
+    RequestState? moviesDetailsState,
+    List<MovieRecomendation>? movieRecomednations,
+    String? moviesRecomendationsMessage,
+    RequestState? moviesRecomendationsState,
+    List<SimilarMovies>? similarMovies,
+    String? similarMovieMessage,
+    RequestState? similarMovieState,
+    Credits ? creditMovie,
+    String? creditMessage,
+    RequestState? creditState,
 
-      }) {
+    SocialMedia ? socialMedia,
+    String? socialMediaMessage,
+    RequestState? socialMediaState,
+
+  }) {
     return MovieDetailsState(
         moviesDetails: moviesDetails ?? this.moviesDetails,
         moviesDetailsMessage: moviesDetailsMessage ?? this.moviesDetailsMessage,
         moviesDetailsState: moviesDetailsState ?? this.moviesDetailsState,
         moviesRecomendations: movieRecomednations ?? this.moviesRecomendations,
         moviesRecomendationsMessage:
-            moviesRecomendationsMessage ?? this.moviesRecomendationsMessage,
+        moviesRecomendationsMessage ?? this.moviesRecomendationsMessage,
         moviesRecomendationsState:
-            moviesRecomendationsState ?? this.moviesRecomendationsState,
+        moviesRecomendationsState ?? this.moviesRecomendationsState,
         similarMovieMessage: similarMovieMessage ?? this.similarMovieMessage,
         similarMovies: similarMovies ?? this.similarMovies,
         similarMovieState: similarMovieState ?? this.similarMovieState,
-        creditsMovies:  creditMovie ?? this.creditsMovies,
-        creditsMoviesMessage:  creditMessage ?? this.creditsMoviesMessage,
-      creditsMoviesState:  creditState ?? this.creditsMoviesState
+        creditsMovies: creditMovie ?? this.creditsMovies,
+        creditsMoviesMessage: creditMessage ?? this.creditsMoviesMessage,
+        creditsMoviesState: creditState ?? this.creditsMoviesState,
+        socialMediaMessage: socialMediaMessage ?? this.similarMovieMessage,
+        socialMediaState: socialMediaState ?? this.similarMovieState,
+        socialMediaMovies: socialMedia ?? this.socialMediaMovies
+
 
     );
-
-
-
   }
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props =>
+      [
         moviesDetails,
         moviesDetailsMessage,
         moviesDetailsState,
-        moviesRecomendationsState,
-        moviesRecomendationsMessage,
         moviesRecomendations,
-        similarMovieState,
+        moviesRecomendationsMessage,
+        moviesRecomendationsState,
         similarMovies,
         similarMovieMessage,
+        similarMovieState,
         creditsMovies,
-    creditsMoviesState,
-    creditsMoviesMessage
+        creditsMoviesMessage,
+        creditsMoviesState,
+        socialMediaMovies,
+        socialMediaMessage,
+        socialMediaState,
       ];
 }

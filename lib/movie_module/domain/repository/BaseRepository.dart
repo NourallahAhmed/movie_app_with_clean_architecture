@@ -3,6 +3,8 @@ import 'package:movie_app/movie_module/domain/entites/credits.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_details.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
+import 'package:movie_app/movie_module/domain/entites/social_media.dart';
+import 'package:movie_app/movie_module/domain/usecase/search_movie_usecase.dart';
 
 import '../../../core/error/failure.dart';
 import '../entites/actor.dart';
@@ -42,6 +44,10 @@ abstract class BaseMovieRepository{
   //todo get actor movies
   Future<Either<Failure ,List<Movie>>> getActorMovies( ActorDetailsParameters actorDetailsParameters);
   Future<Either<Failure ,Actor>> getActorDetails( ActorDetailsParameters actorDetailsParameters);
+
+  Future<Either<Failure ,List<Movie>>> searchMovies(SearchParameters searchParameters);
+
+  Future<Either<Failure ,SocialMedia>> getSocialMediaIds(MovieDetailsParameters movieDetailsParameters);
 
 
   

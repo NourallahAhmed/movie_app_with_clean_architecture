@@ -4,16 +4,19 @@ import 'package:movie_app/movie_module/domain/usecase/get_movie_cast_usecase.dar
 import 'package:movie_app/movie_module/domain/usecase/get_movie_details_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_recommendations_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_similar_usecase.dart';
+import 'package:movie_app/movie_module/domain/usecase/get_movie_social_media.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_popular_movies_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_top_rated_movies_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_upcoming_movie_usecase.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc_event.dart';
+import 'package:movie_app/movie_module/presentation/controller/search_bloc.dart';
 import '../../movie_module/data/datasource/remote_data_source.dart';
 import '../../movie_module/data/repository/MovieRepository.dart';
 import '../../movie_module/domain/repository/BaseRepository.dart';
 import '../../movie_module/domain/usecase/get_actor_details_usecase.dart';
 import '../../movie_module/domain/usecase/get_now_playing_movie_usecase.dart';
+import '../../movie_module/domain/usecase/search_movie_usecase.dart';
 import '../../movie_module/presentation/controller/actor_movies_bloc.dart';
 import '../../movie_module/presentation/controller/movie_details_bloc.dart';
 
@@ -23,9 +26,11 @@ class ServiceLocator{
   void init(){
     //todo: MovieBloc
     serviceLocator.registerFactory(() => MoviesBloc(serviceLocator(),serviceLocator(),serviceLocator() , serviceLocator()));
+ //todo: SearchBloc
+    serviceLocator.registerFactory(() => SearchBloc(serviceLocator()));
 
     //todo: MovieDetailsBloc
-    serviceLocator.registerFactory(() => MovieDetailsBloc(serviceLocator(),serviceLocator() , serviceLocator() , serviceLocator()));
+    serviceLocator.registerFactory(() => MovieDetailsBloc(serviceLocator(),serviceLocator() , serviceLocator() , serviceLocator(), serviceLocator()));
     //todo: MovieDetailsBloc
 
     serviceLocator.registerFactory(() => ActorMoviesBloc(serviceLocator() , serviceLocator()));
@@ -67,6 +72,13 @@ class ServiceLocator{
     //todo: GetActorDetailsUseCase
 
     serviceLocator.registerLazySingleton<GetActorDetailsUseCase>(() =>  GetActorDetailsUseCase(serviceLocator()));
+
+    //todo: search movie UseCase
+
+    serviceLocator.registerLazySingleton<SearchMoviesUseCase>(() =>  SearchMoviesUseCase(serviceLocator()));
+    //todo: GetMovieSocialMediaUseCase
+
+    serviceLocator.registerLazySingleton<GetMovieSocialMediaUseCase>(() =>  GetMovieSocialMediaUseCase(serviceLocator()));
   }
 
 }

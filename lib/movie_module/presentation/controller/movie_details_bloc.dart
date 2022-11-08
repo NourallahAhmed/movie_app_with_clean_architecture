@@ -5,8 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/movie_module/domain/entites/credits.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
+import 'package:movie_app/movie_module/domain/entites/social_media.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_cast_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_recommendations_usecase.dart';
+import 'package:movie_app/movie_module/domain/usecase/get_movie_social_media.dart';
 import '../../../core/utils/enums.dart';
 import '../../domain/entites/movie_details.dart';
 import '../../domain/usecase/get_movie_details_usecase.dart';
@@ -21,17 +23,20 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   GetMovieRecomendationsUseCase getMovieRecomendationsUseCase;
   GetMovieSimilarUseCase getMovieSimilarUseCase;
   GetMovieCastUseCase getMovieCastUseCase;
+  GetMovieSocialMediaUseCase getMovieSocialMediaUseCase;
 
       MovieDetailsBloc(this.getMovieDetailsUseCase,
   this.getMovieRecomendationsUseCase,
   this.getMovieSimilarUseCase,
-   this.getMovieCastUseCase
+   this.getMovieCastUseCase,
+          this.getMovieSocialMediaUseCase
   ):
   super(MovieDetailsState()) {
   on<GetMovieDetailsEvent>(_getMovieDetails);
   on<GetMovieRecomendationsEvent>(_getMovieRecomendations);
   on<GetSimilarMovieEvent>(_getSimilarMovie);
   on<GetMovieCastEvent>(_getMovieCast);
+  on<GetSocialMediaEvent>(_getSocialMedia);
   }
 
   FutureOr<void> _getMovieDetails(GetMovieDetailsEvent event,
@@ -101,5 +106,25 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
             emit(state.copyWith(
                 creditState: RequestState.loaded,
                 creditMovie: r)));
+  }
+
+  FutureOr<void> _getSocialMedia(GetSocialMediaEvent event, Emitter<MovieDetailsState> emit) async {
+
+    //function call() will be called automatically
+    final result = await getMovieSocialMediaUseCase(
+        MovieDetailsParameters(event.id));
+
+    print("_getMovieCast");
+
+    print(result);
+
+    result.fold((l) =>
+        emit(state.copyWith(
+            socialMediaMessage: l.message,
+            socialMediaState: RequestState.error)),
+            (r)  =>
+            emit(state.copyWith(
+                socialMediaState: RequestState.loaded,
+                socialMedia: r)));
   }
 }

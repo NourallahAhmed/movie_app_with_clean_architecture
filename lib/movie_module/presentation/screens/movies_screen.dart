@@ -9,7 +9,9 @@ import 'package:movie_app/movie_module/presentation/component/popular_component.
 import 'package:movie_app/movie_module/presentation/component/top_rated_component.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc_event.dart';
+import 'package:movie_app/movie_module/presentation/screens/search_screen.dart';
 
+import '../component/search_bar_component.dart';
 import '../component/upcoming_component.dart';
 
 
@@ -25,7 +27,22 @@ class MainMoviesScreen extends StatelessWidget {
         ..add(GetTopRatedMovieEvent())
         ..add(GetUpComingEvent()),
       child: Scaffold(
-        // appBar: AppBar(title: Text("Movies")),
+        appBar: AppBar(title: Text("Movies"),
+  backgroundColor: Colors.transparent,
+
+          actions: [
+          IconButton(
+            onPressed: () {
+              // method to show the search bar
+              showSearch(
+                  context: context,
+                  // delegate to customize the search bar
+                  delegate: CustomSearchDelegate());
+            },
+            icon: const Icon(Icons.search),
+          )
+        ]
+          ),
         body: SingleChildScrollView(
           key: const Key('movieScrollView'),
           child: Column(
@@ -151,4 +168,6 @@ class MainMoviesScreen extends StatelessWidget {
       ),
     );
   }
+
+
 }

@@ -9,6 +9,7 @@ import 'package:movie_app/core/utils/api_constants.dart';
 import 'package:movie_app/core/utils/app_constants.dart';
 import 'package:movie_app/core/utils/enums.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_details_bloc.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../../core/utils/assets_images.dart';
 import '../../../core/utils/functions.dart';
 import '../../domain/entites/genres.dart';
@@ -29,7 +30,8 @@ class MovieDetailScreen extends StatelessWidget {
           ..add(GetSimilarMovieEvent(id))
           ..add(GetMovieCastEvent(id))
           ..add(GetSocialMediaEvent(id)),
-        child: const Scaffold(
+        child:  Scaffold(
+
           body: MovieDetailContent(),
         ));
   }
@@ -46,7 +48,7 @@ class MovieDetailContent extends StatelessWidget {
         builder: (context, state) {
       switch (state.moviesDetailsState) {
         case RequestState.loading:
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         case RequestState.loaded:
@@ -54,6 +56,20 @@ class MovieDetailContent extends StatelessWidget {
             key: const Key('movieDetailScrollView'),
             slivers: [
               SliverAppBar(
+                actions: [
+                  IconButton(onPressed: () async {
+                    final box = context.findRenderObject() as RenderBox?;
+
+                    await Share.share(
+                      "  _ Home of Movies  _ \n Lets watch ${state.moviesDetails?.title} together \n  It talks about ${state.moviesDetails?.overview} ",
+
+
+
+                      subject: "Watch Party",
+                      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+                    );
+                  }, icon: Icon(Icons.share))
+                ],
                 pinned: true,
                 expandedHeight: 250.0,
                 flexibleSpace: FlexibleSpaceBar(
@@ -215,10 +231,19 @@ class MovieDetailContent extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverPadding(
+          /*    SliverPadding(
                 padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
-                sliver: SliverToBoxAdapter(child: CastComponent()),
-              ),
+                sliver:*/
+
+
+              SliverToBoxAdapter(
+
+                  child: SizedBox(
+
+                      height: 250,
+                      // width: 200,
+                      child: CastComponent())),
+              // ),
               SliverPadding(
                 padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
                 sliver: SliverToBoxAdapter(

@@ -11,6 +11,7 @@ import '../../../core/utils/api_constants.dart';
 import '../../../core/utils/enums.dart';
 import '../../domain/entites/cast.dart';
 import '../component/actor_bio_component.dart';
+import '../component/actor_social_media_component.dart';
 import 'movie_detail_screen.dart';
 
 class ActorMoviesScreen extends StatelessWidget {
@@ -25,7 +26,8 @@ class ActorMoviesScreen extends StatelessWidget {
         create: (BuildContext context) =>
             serviceLocator<ActorMoviesBloc>()
               ..add(ActorMoviesEvent(id))
-        ..add(ActorDetailsEvent(id)),
+        ..add(ActorDetailsEvent(id))
+        ..add(ActorSocialMediaEvent(id)),
         child: Scaffold(
           body: BlocBuilder<ActorMoviesBloc, ActorMoviesState>(
               buildWhen: (pre, current) =>
@@ -88,7 +90,7 @@ class ActorMoviesScreen extends StatelessWidget {
                                         width: 100.0,
                                         height: 100.0,
                                         decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
+                                          // shape: BoxShape.circle,
                                           image: DecorationImage(
                                               image: imageProvider, fit: BoxFit.fill),
                                         )),
@@ -97,9 +99,20 @@ class ActorMoviesScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-
+                          //   SliverToBoxAdapter(
+                          //     child: FadeInUp(
+                          //   from: 20,
+                          //   duration: const Duration(milliseconds: 500),
+                          //   child: Text(state.actorDetails?.name ?? "",
+                          //       style: GoogleFonts.poppins(
+                          //         fontSize: 23,
+                          //         fontWeight: FontWeight.w700,
+                          //         letterSpacing: 1.2,
+                          //       )),
+                          // )),
+                          // const ActorSocialMediaComponent(),
                             //todo: bio
-                            ActorBioComponent(),
+                            const ActorBioComponent(),
                             //todo: MOVIES
                             SliverPadding(
                                 padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),

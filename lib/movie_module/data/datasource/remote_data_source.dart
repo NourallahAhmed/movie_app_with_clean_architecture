@@ -38,6 +38,8 @@ abstract class BaseRemoteDataSource{
   Future<List<MovieModel>> searchMovie(SearchParameters searchParameters);
 
   Future<SocialMediaModel> getSocialMediaIds(MovieDetailsParameters movieDetailsParameters);
+
+  Future<SocialMediaModel> getPersonSocialMediaIds(ActorDetailsParameters actorDetailsParameters);
 }
 
 class RemoteDataSource implements BaseRemoteDataSource{
@@ -204,6 +206,21 @@ class RemoteDataSource implements BaseRemoteDataSource{
   @override
   Future<SocialMediaModel> getSocialMediaIds(MovieDetailsParameters movieDetailsParameters)async {
     final url = ApiConstants.socialMediaMovieIds(movieDetailsParameters.movieId);
+    print(url);
+    var response =  await Dio().get(url);
+
+    if (response.statusCode == 200){
+
+      return  SocialMediaModel.fromJson( response.data) ;
+    }
+    else{
+      throw ServiceExceptions(errorMessage: ErrorMessage.fromJson(response.data));
+    }
+  }
+
+  @override
+  Future<SocialMediaModel> getPersonSocialMediaIds( ActorDetailsParameters actorDetailsParameters) async {
+    final url = ApiConstants.socialPersonMovieIds(actorDetailsParameters.actorId);
     print(url);
     var response =  await Dio().get(url);
 

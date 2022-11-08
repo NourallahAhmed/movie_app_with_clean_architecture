@@ -7,13 +7,18 @@ import 'package:movie_app/movie_module/presentation/controller/actor_movies_bloc
 import '../../../core/utils/enums.dart';
 import 'package:readmore/readmore.dart';
 
+import 'actor_social_media_component.dart';
+
 class ActorBioComponent extends StatelessWidget {
   const ActorBioComponent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
       return BlocBuilder<ActorMoviesBloc , ActorMoviesState>
-        (builder: (context , state){
+
+        (
+          buildWhen: (prev, current) => prev.actorDetailsState != current.actorDetailsState,
+          builder: (context , state){
           switch (state.actorDetailsState){
 
             case RequestState.loading:
@@ -36,27 +41,26 @@ class ActorBioComponent extends StatelessWidget {
                               letterSpacing: 1.2,
                             )),
                         const SizedBox(height: 8.0),
-                        // Text("Born in  ${state.actorDetails?.birthday} "?? "",
-                        //     style: const TextStyle(
-                        //       fontSize: 15,
-                        //       fontWeight: FontWeight.w700,
-                        //       letterSpacing: 1.2,
-                        //     )),
-                        // const SizedBox(height: 8.0),
+
+                        const ActorSocialMediaComponent(),
+
+                        state.actorDetails!.placeOfBirth != "" ?
+
                         Text("Born at the ${state.actorDetails?.placeOfBirth ?? ""} in  ${state.actorDetails?.birthday ?? ""} " ?? "",
                             style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
                               letterSpacing: 1.2,
-                            )),
+                            ))
+                            :  Container(),
                         const SizedBox(height: 8.0),
-
-                        const Text("Bio :" ?? " ",
+                        state.actorDetails!.biography != "" ?
+                        const Text("Biography :" ?? " ",
                             style:  TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
                               letterSpacing: 1.2,
-                            )),
+                            )) : Container(),
 
                         const SizedBox(height: 8.0),
 

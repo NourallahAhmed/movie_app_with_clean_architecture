@@ -9,6 +9,10 @@ class ActorMoviesState extends Equatable {
   final String actorDetailsMessage;
   final Actor? actorDetails;
 
+  final RequestState actorSocialMediaState;
+  final String actorSocialMediaMessage;
+  final SocialMedia? actorSocialMedia;
+
   const ActorMoviesState({
     this.actorMoviesState = RequestState.loading,
     this.actorMoviesMessage = "",
@@ -16,6 +20,9 @@ class ActorMoviesState extends Equatable {
     this.actorDetailsState = RequestState.loading,
     this.actorDetailsMessage = "",
     this.actorDetails,
+    this.actorSocialMediaState = RequestState.loading,
+    this.actorSocialMediaMessage = "",
+    this.actorSocialMedia,
   });
 
   ActorMoviesState copyWith({
@@ -25,6 +32,9 @@ class ActorMoviesState extends Equatable {
     Actor? actorDetails,
     String? actorMessage,
     RequestState? actorDetailsState,
+    SocialMedia? actorSocialMedia,
+    String? actorSocialMessage,
+    RequestState? actorSocialState,
   }) {
     return ActorMoviesState(
         actorMovies: actorMovies ?? this.actorMovies,
@@ -32,16 +42,24 @@ class ActorMoviesState extends Equatable {
         actorMoviesState: actorState ?? this.actorMoviesState,
         actorDetails: actorDetails ?? this.actorDetails,
         actorDetailsMessage: actorMessage ?? this.actorDetailsMessage,
-        actorDetailsState: actorState ?? this.actorDetailsState);
+        actorDetailsState: actorState ?? this.actorDetailsState,
+        actorSocialMediaState: actorSocialState ?? this.actorSocialMediaState,
+        actorSocialMediaMessage: actorSocialMessage ??
+            this.actorSocialMediaMessage,
+        actorSocialMedia: actorSocialMedia ?? this.actorSocialMedia);
   }
 
   @override
-  List<Object?> get props => [
-        actorMovies,
-        actorMoviesMessage,
+  List<Object?> get props =>
+      [
         actorMoviesState,
+        actorMoviesMessage,
+        actorMovies,
         actorDetailsState,
+        actorDetailsMessage,
         actorDetails,
-        actorDetailsMessage
+        actorSocialMediaState,
+        actorSocialMediaMessage,
+        actorSocialMedia,
       ];
 }

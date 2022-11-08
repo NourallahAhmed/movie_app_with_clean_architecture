@@ -33,7 +33,8 @@ class ApiConstants{
 
 
   //todo getSocialMediaIds
-  static String socialMediaMovieIds (int movieID) => "${baseURL}movie/${movieID}/external_ids?api_key=${apiKey}";
+  static String socialMediaMovieIds (int movieID) => "${baseURL}movie/${movieID}/external_ids?api_key=${apiKey}";  //todo getSocialMediaIds
+  static String socialPersonMovieIds (int personID) => "${baseURL}person/${personID}/external_ids?api_key=${apiKey}";
 
   //todo: twitter
   static String twitterUrl(String socialMediaID) =>"https://twitter.com/${socialMediaID}";

@@ -5,7 +5,7 @@ import 'package:movie_app/movie_module/presentation/screens/movies_screen.dart';
 void main() {
   // serviceLocator.registerSingleton<ServiceLocator>(ServiceLocator(),
   //     signalsReady: true);
-
+  WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator().init();
   runApp(const MyApp());
 }

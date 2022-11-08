@@ -47,65 +47,69 @@ class CastComponent extends StatelessWidget{
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  itemCount: state.creditsMovies?.cast.length ,
+                  itemCount: state.creditsMovies?.cast.length  ,
 
                   itemBuilder: (context, index) {
                     final cast = state.creditsMovies!.cast[index];
-                    return Container(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      // decoration:  const BoxDecoration(
-                      // shape: BoxShape. circle),
-                      child: InkWell(
-                        onTap: () {
-                          /// TODO : NAVIGATE TO  MOVIE DETAILS
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ActorMoviesScreen(id: cast.id!, cast: cast, )));
-                        },
-                        child: ClipRRect(
-                          borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0)),
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8.0 , left:  8.0 , bottom: 10.0) ,
+
+                      child: Container(
+                        // margin: EdgeInsets.only(top: 9),
+                        padding: const EdgeInsets.only(bottom:  25.0) ,
+                        decoration:  const  BoxDecoration(
+                           color: Colors.black12 ,
+                            borderRadius: BorderRadius.all(Radius.circular(10))
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            /// TODO : NAVIGATE TO  MOVIE DETAILS
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ActorMoviesScreen(id: cast.id!, cast: cast, )));
+                          },
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              CachedNetworkImage(
-                                // width: 120.0,
-                                fit: BoxFit.fill,
-                                imageUrl: ApiConstants.imageUrl(cast.image! ),
-                                imageBuilder: (context, imageProvider) => Container(
-                                  width: 100.0,
-                                  height: 100.0,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image: imageProvider, fit: BoxFit.fill),
-                                  ),
-                                ),
-                                placeholder: (context, url) => Shimmer.fromColors(
-                                  baseColor: Colors.grey[850]!,
-                                  highlightColor: Colors.grey[800]!,
-                                  child: Container(
-                                    height: 100.0,
-                                    width: 80.0,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                CachedNetworkImage(
+                                  // width: 120.0,
+                                  fit: BoxFit.fill,
+                                  imageUrl: ApiConstants.imageUrl(cast.image! ),
+                                  imageBuilder: (context, imageProvider) => Container(
+                                    width: 150.0,
+                                    height: 150.0,
                                     decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(8.0),
+                                        borderRadius: const  BorderRadius.all(Radius.circular(10)),
+                                      image: DecorationImage(
+                                          image: imageProvider, fit: BoxFit.fill),
                                     ),
                                   ),
+                                  placeholder: (context, url) => Shimmer.fromColors(
+                                    baseColor: Colors.grey[850]!,
+                                    highlightColor: Colors.grey[800]!,
+                                    child: Container(
+                                      height: 100.0,
+                                      width: 80.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.circular(8.0),
+                                      ),
+                                    ),
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+
                                 ),
-                                errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
 
-                              ),
+                                const SizedBox(height: 10,) ,
 
-                              SizedBox(height: 10,) ,
+                                Text(cast.name!),
+                                const SizedBox(height: 10,) ,
+                                // Text("in \n"),
+                                cast.character!.contains("/") ? Text(cast.character!.substring(0 ,  cast.character!.indexOf("/")  )) : Text(cast.character!)
+                              ]
+                            ),
 
-                              Text(cast.name!),
-                              // Text("in"),
-                              // Text(cast.character!.substring(0,[cast.character!.indexOf("\")]),
-                            ],
-                          ),
                         ),
                       ),
-
                     );
                   },
                 ),

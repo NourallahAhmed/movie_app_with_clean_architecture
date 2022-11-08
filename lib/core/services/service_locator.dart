@@ -5,6 +5,7 @@ import 'package:movie_app/movie_module/domain/usecase/get_movie_details_usecase.
 import 'package:movie_app/movie_module/domain/usecase/get_movie_recommendations_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_similar_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_social_media.dart';
+import 'package:movie_app/movie_module/domain/usecase/get_person_social_media.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_popular_movies_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_top_rated_movies_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_upcoming_movie_usecase.dart';
@@ -33,7 +34,7 @@ class ServiceLocator{
     serviceLocator.registerFactory(() => MovieDetailsBloc(serviceLocator(),serviceLocator() , serviceLocator() , serviceLocator(), serviceLocator()));
     //todo: MovieDetailsBloc
 
-    serviceLocator.registerFactory(() => ActorMoviesBloc(serviceLocator() , serviceLocator()));
+    serviceLocator.registerFactory(() => ActorMoviesBloc(serviceLocator() , serviceLocator(), serviceLocator()));
 
     //todo: RemoteDataSource
     serviceLocator.registerLazySingleton<BaseRemoteDataSource>(() =>  RemoteDataSource());
@@ -79,6 +80,10 @@ class ServiceLocator{
     //todo: GetMovieSocialMediaUseCase
 
     serviceLocator.registerLazySingleton<GetMovieSocialMediaUseCase>(() =>  GetMovieSocialMediaUseCase(serviceLocator()));
+
+    //todo: GetPersonSocialMediaUseCase
+
+    serviceLocator.registerLazySingleton<GetPersonSocialMediaUseCase>(() =>  GetPersonSocialMediaUseCase(serviceLocator()));
   }
 
 }

@@ -152,5 +152,15 @@ class MovieRepository implements BaseMovieRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, SocialMedia>> getActorSocialMedia(ActorDetailsParameters actorDetailsParameters) async {
+    try {
+      return Right(await baseRemoteDataSource.getPersonSocialMediaIds(actorDetailsParameters));
+    }
+    on ServiceExceptions catch (failure){
+    return Left(ServerFailure(failure.errorMessage.statusMessage));
+    }
+  }
+
 
 }

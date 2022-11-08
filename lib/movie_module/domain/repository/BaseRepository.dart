@@ -49,6 +49,8 @@ abstract class BaseMovieRepository{
 
   Future<Either<Failure ,SocialMedia>> getSocialMediaIds(MovieDetailsParameters movieDetailsParameters);
 
+  Future<Either<Failure ,SocialMedia>> getActorSocialMedia(ActorDetailsParameters actorDetailsParameters);
+
 
   
 

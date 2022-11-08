@@ -19,4 +19,9 @@ class ActorDetailsEvent extends ActorEvents {
    ActorDetailsEvent(this.id);
 
 }
+class ActorSocialMediaEvent extends ActorEvents {
+  final int id;
+  ActorSocialMediaEvent(this.id);
+
+}
 

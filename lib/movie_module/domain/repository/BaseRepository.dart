@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:movie_app/core/base_usecase/base_usecase.dart';
 import 'package:movie_app/movie_module/domain/entites/credits.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_details.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
@@ -50,6 +51,10 @@ abstract class BaseMovieRepository{
   Future<Either<Failure ,SocialMedia>> getSocialMediaIds(MovieDetailsParameters movieDetailsParameters);
 
   Future<Either<Failure ,SocialMedia>> getActorSocialMedia(ActorDetailsParameters actorDetailsParameters);
+
+  Future<Either<Failure ,List<Movie>>> getSeeMorePopularMovies(MovieParameters movieParameters);
+
+  Future<Either<Failure ,List<Movie>>>  getTopRatedPopularMovies(MovieParameters movieParameters);
 
 
   

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:movie_app/core/base_usecase/base_usecase.dart';
 
 /// events equal to the use_cases
 abstract class MoviesEvents extends Equatable{
@@ -12,6 +13,8 @@ abstract class MoviesEvents extends Equatable{
 class GetNowPlayingMovieEvent extends MoviesEvents{
 
 }
+
+
 
 class GetTopRatedMovieEvent extends MoviesEvents{
 

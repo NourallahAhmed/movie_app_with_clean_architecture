@@ -7,11 +7,14 @@ import 'package:movie_app/movie_module/domain/usecase/get_movie_similar_usecase.
 import 'package:movie_app/movie_module/domain/usecase/get_movie_social_media.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_person_social_media.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_popular_movies_usecase.dart';
+import 'package:movie_app/movie_module/domain/usecase/get_seemore_popular_usecase.dart';
+import 'package:movie_app/movie_module/domain/usecase/get_seemore_toprated_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_top_rated_movies_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_upcoming_movie_usecase.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc_event.dart';
 import 'package:movie_app/movie_module/presentation/controller/search_bloc.dart';
+import 'package:movie_app/movie_module/presentation/controller/seemore_movies_bloc.dart';
 import '../../movie_module/data/datasource/remote_data_source.dart';
 import '../../movie_module/data/repository/MovieRepository.dart';
 import '../../movie_module/domain/repository/BaseRepository.dart';
@@ -27,11 +30,18 @@ class ServiceLocator{
   void init(){
     //todo: MovieBloc
     serviceLocator.registerFactory(() => MoviesBloc(serviceLocator(),serviceLocator(),serviceLocator() , serviceLocator()));
- //todo: SearchBloc
+
+
+    //todo: SearchBloc
     serviceLocator.registerFactory(() => SearchBloc(serviceLocator()));
 
     //todo: MovieDetailsBloc
     serviceLocator.registerFactory(() => MovieDetailsBloc(serviceLocator(),serviceLocator() , serviceLocator() , serviceLocator(), serviceLocator()));
+
+    //todo: SeeMoreMovieBloc
+    serviceLocator.registerFactory(() => SeemoreMoviesBloc(serviceLocator(),serviceLocator(), ));
+
+
     //todo: MovieDetailsBloc
 
     serviceLocator.registerFactory(() => ActorMoviesBloc(serviceLocator() , serviceLocator(), serviceLocator()));
@@ -84,6 +94,14 @@ class ServiceLocator{
     //todo: GetPersonSocialMediaUseCase
 
     serviceLocator.registerLazySingleton<GetPersonSocialMediaUseCase>(() =>  GetPersonSocialMediaUseCase(serviceLocator()));
+
+    //todo: GetSeeMore Popular UseCase
+
+    serviceLocator.registerLazySingleton<GetSeeMorePopularMoviesUseCase>(() =>  GetSeeMorePopularMoviesUseCase(serviceLocator()));
+
+    //todo: GetSeeMore TopRated UseCase
+
+    serviceLocator.registerLazySingleton<GetSeeMoreTopRatedMoviesUseCase>(() =>  GetSeeMoreTopRatedMoviesUseCase(serviceLocator()));
   }
 
 }

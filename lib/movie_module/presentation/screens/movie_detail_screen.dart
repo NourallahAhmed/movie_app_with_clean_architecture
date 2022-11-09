@@ -61,14 +61,14 @@ class MovieDetailContent extends StatelessWidget {
                     final box = context.findRenderObject() as RenderBox?;
 
                     await Share.share(
-                      "  _ Home of Movies  _ \n Lets watch ${state.moviesDetails?.title} together \n  It talks about ${state.moviesDetails?.overview} ",
+                      "  _  Home of Movies  _ \n Lets watch ${state.moviesDetails?.title} together\n  It talks about: \n ${state.moviesDetails?.overview} ",
 
 
 
                       subject: "Watch Party",
                       sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
                     );
-                  }, icon: Icon(Icons.share))
+                  }, icon: const  Icon(Icons.share))
                 ],
                 pinned: true,
                 expandedHeight: 250.0,
@@ -102,6 +102,9 @@ class MovieDetailContent extends StatelessWidget {
                   ),
                 ),
               ),
+
+
+
               SliverToBoxAdapter(
                 child: FadeInUp(
                   from: 20,
@@ -231,11 +234,6 @@ class MovieDetailContent extends StatelessWidget {
                   ),
                 ),
               ),
-          /*    SliverPadding(
-                padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
-                sliver:*/
-
-
               SliverToBoxAdapter(
 
                   child: SizedBox(
@@ -243,7 +241,6 @@ class MovieDetailContent extends StatelessWidget {
                       height: 250,
                       // width: 200,
                       child: CastComponent())),
-              // ),
               SliverPadding(
                 padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
                 sliver: SliverToBoxAdapter(

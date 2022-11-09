@@ -7,6 +7,13 @@ class ApiConstants{
   static final popularMovies = "${ApiConstants.baseURL}movie/popular?api_key=${ApiConstants.apiKey}";
   static final topRatedMovies = "${ApiConstants.baseURL}movie/top_rated?api_key=${ApiConstants.apiKey}";
   static final baseImageURL = "https://image.tmdb.org/t/p/w500";
+
+  //todo See More
+
+  static String seeMoreUpComingMovies(int page) => "${ApiConstants.baseURL}movie/upcoming?api_key=${ApiConstants.apiKey}&page=${page}";
+  static String seeMorePopularMovies(int page) => "${ApiConstants.baseURL}movie/popular?api_key=${ApiConstants.apiKey}&page=${page}";
+  static String seeMoreTopRatedMovies(int page) => "${ApiConstants.baseURL}movie/top_rated?api_key=${ApiConstants.apiKey}&page=${page}";
+
   //todo Actors
   static String getActorMovies(int actorID) => "${baseURL}person/${actorID}/movie_credits?api_key=${apiKey}";
   static String getActorDetails(int actorID) => "${baseURL}person/${actorID}?api_key=${apiKey}";

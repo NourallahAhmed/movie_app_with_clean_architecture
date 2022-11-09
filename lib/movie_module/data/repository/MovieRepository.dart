@@ -1,3 +1,4 @@
+import 'package:movie_app/core/base_usecase/base_usecase.dart';
 import 'package:movie_app/core/error/Exceptions.dart';
 import 'package:movie_app/core/error/failure.dart';
 import 'package:movie_app/movie_module/data/datasource/remote_data_source.dart';
@@ -156,6 +157,26 @@ class MovieRepository implements BaseMovieRepository {
   Future<Either<Failure, SocialMedia>> getActorSocialMedia(ActorDetailsParameters actorDetailsParameters) async {
     try {
       return Right(await baseRemoteDataSource.getPersonSocialMediaIds(actorDetailsParameters));
+    }
+    on ServiceExceptions catch (failure){
+    return Left(ServerFailure(failure.errorMessage.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Movie>>> getSeeMorePopularMovies(MovieParameters movieParameters) async {
+    try {
+      return Right(await baseRemoteDataSource.getSeeMorePopularMovies(movieParameters));
+    }
+    on ServiceExceptions catch (failure){
+    return Left(ServerFailure(failure.errorMessage.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Movie>>> getTopRatedPopularMovies(MovieParameters movieParameters) async {
+    try {
+      return Right(await baseRemoteDataSource.getSeeMoreTopRatedMovies(movieParameters));
     }
     on ServiceExceptions catch (failure){
     return Left(ServerFailure(failure.errorMessage.statusMessage));

@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/core/services/service_locator.dart';
-
 import 'package:movie_app/movie_module/presentation/component/now_playing_component.dart';
 import 'package:movie_app/movie_module/presentation/component/popular_component.dart';
 import 'package:movie_app/movie_module/presentation/component/top_rated_component.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc_event.dart';
-import 'package:movie_app/movie_module/presentation/screens/search_screen.dart';
-
+import 'package:movie_app/movie_module/presentation/screens/seemore_popular_screen.dart';
 import '../component/search_bar_component.dart';
 import '../component/upcoming_component.dart';
 
@@ -69,9 +67,13 @@ class MainMoviesScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
-                          children: const [
-                            Text('See More'),
-                            Icon(
+                          children:  [
+                            GestureDetector(
+                              child: const Text('See More') ,
+                              onTap:  (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const  SeeMorePopularScreen()));
+                            },),
+                            const Icon(
                               Icons.arrow_forward_ios,
                               size: 16.0,
                             )

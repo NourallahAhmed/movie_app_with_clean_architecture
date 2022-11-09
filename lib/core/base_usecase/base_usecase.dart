@@ -16,3 +16,12 @@ class NoParameters extends Equatable{
   List<Object?> get props => [];
 
 }
+class MovieParameters extends Equatable{
+  int page;
+   MovieParameters(this.page);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [page];
+
+}

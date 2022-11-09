@@ -18,7 +18,4 @@ class GetPopularMoviesUseCase extends BaseUseCase<List<Movie> , NoParameters>{
     return await baseRepository.getPopularMovies();
 
   }
-
-
-
 }

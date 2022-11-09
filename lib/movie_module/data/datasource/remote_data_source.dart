@@ -14,6 +14,7 @@ import 'package:movie_app/movie_module/domain/usecase/get_actor_movies_usecase.d
 import 'package:movie_app/movie_module/domain/usecase/get_movie_details_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/search_movie_usecase.dart';
 
+import '../../../core/base_usecase/base_usecase.dart';
 import '../../domain/entites/actor.dart';
 import '../../domain/entites/movie_recomendation.dart';
 import '../../domain/usecase/get_movie_recommendations_usecase.dart';
@@ -40,6 +41,10 @@ abstract class BaseRemoteDataSource{
   Future<SocialMediaModel> getSocialMediaIds(MovieDetailsParameters movieDetailsParameters);
 
   Future<SocialMediaModel> getPersonSocialMediaIds(ActorDetailsParameters actorDetailsParameters);
+
+  Future<List<MovieModel>> getSeeMorePopularMovies(MovieParameters movieParameters);
+
+  Future<List<MovieModel>>  getSeeMoreTopRatedMovies(MovieParameters movieParameters);
 }
 
 class RemoteDataSource implements BaseRemoteDataSource{
@@ -227,6 +232,36 @@ class RemoteDataSource implements BaseRemoteDataSource{
     if (response.statusCode == 200){
 
       return  SocialMediaModel.fromJson( response.data) ;
+    }
+    else{
+      throw ServiceExceptions(errorMessage: ErrorMessage.fromJson(response.data));
+    }
+  }
+
+  @override
+  Future<List<MovieModel>> getSeeMorePopularMovies(MovieParameters movieParameters) async {
+    final url = ApiConstants.seeMorePopularMovies(movieParameters.page);
+    print(url);
+    var response =  await Dio().get(url);
+
+    if (response.statusCode == 200){
+
+      return List<MovieModel>.from(response.data["results"].map((e)=> MovieModel.fromJson(e))) ;
+    }
+    else{
+      throw ServiceExceptions(errorMessage: ErrorMessage.fromJson(response.data));
+    }
+  }
+
+  @override
+  Future<List<MovieModel>> getSeeMoreTopRatedMovies(MovieParameters movieParameters) async {
+    final url = ApiConstants.seeMoreTopRatedMovies(movieParameters.page);
+    print(url);
+    var response =  await Dio().get(url);
+
+    if (response.statusCode == 200){
+
+      return List<MovieModel>.from(response.data["results"].map((e)=> MovieModel.fromJson(e))) ;
     }
     else{
       throw ServiceExceptions(errorMessage: ErrorMessage.fromJson(response.data));

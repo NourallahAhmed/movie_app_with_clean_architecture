@@ -48,9 +48,18 @@ class ApiConstants{
 
   //todo: facebook
   static String facebookUrl(String socialMediaID) =>"https://www.facebook.com/${socialMediaID}";
+
   //todo: instgram
   static String instgramUrl(String socialMediaID) =>"https://www.instagram.com/${socialMediaID}";
 
+
+  //todo getVedios
+
+  static String getVedios(int id) => "${baseURL}/movie/${id}/videos?api_key=${apiKey}";
+
+
+  //Todo youTube
+  static String youtubeTrailer(String key ) => "https://www.youtube.com/watch?v=${key}";
 
 
 }

@@ -7,6 +7,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../core/utils/api_constants.dart';
 import '../../../core/utils/enums.dart';
 import '../controller/movie_details_bloc.dart';
+import '../controller/movie_details_state.dart';
 
 class Recomendations extends StatelessWidget {
 

@@ -48,6 +48,8 @@ dependencies:
   url_launcher: ^6.1.6
   flutter_signin_button:
   share_plus: ^6.2.0
+  youtube_player_flutter: ^8.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

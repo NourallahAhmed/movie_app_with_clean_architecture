@@ -19,6 +19,7 @@ import '../../movie_module/data/datasource/remote_data_source.dart';
 import '../../movie_module/data/repository/MovieRepository.dart';
 import '../../movie_module/domain/repository/BaseRepository.dart';
 import '../../movie_module/domain/usecase/get_actor_details_usecase.dart';
+import '../../movie_module/domain/usecase/get_movie_vedios_usecase.dart';
 import '../../movie_module/domain/usecase/get_now_playing_movie_usecase.dart';
 import '../../movie_module/domain/usecase/search_movie_usecase.dart';
 import '../../movie_module/presentation/controller/actor_movies_bloc.dart';
@@ -36,7 +37,7 @@ class ServiceLocator{
     serviceLocator.registerFactory(() => SearchBloc(serviceLocator()));
 
     //todo: MovieDetailsBloc
-    serviceLocator.registerFactory(() => MovieDetailsBloc(serviceLocator(),serviceLocator() , serviceLocator() , serviceLocator(), serviceLocator()));
+    serviceLocator.registerFactory(() => MovieDetailsBloc(serviceLocator(),serviceLocator() , serviceLocator() ,serviceLocator() , serviceLocator(), serviceLocator()));
 
     //todo: SeeMoreMovieBloc
     serviceLocator.registerFactory(() => SeemoreMoviesBloc(serviceLocator(),serviceLocator(), ));
@@ -102,6 +103,14 @@ class ServiceLocator{
     //todo: GetSeeMore TopRated UseCase
 
     serviceLocator.registerLazySingleton<GetSeeMoreTopRatedMoviesUseCase>(() =>  GetSeeMoreTopRatedMoviesUseCase(serviceLocator()));
+
+
+    //todo: Get movieVedios UseCase
+
+    serviceLocator.registerLazySingleton<GetMovieVediosUseCase>(() =>  GetMovieVediosUseCase(serviceLocator()));
+
+
+
   }
 
 }

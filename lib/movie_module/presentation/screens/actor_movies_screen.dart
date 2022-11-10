@@ -112,6 +112,8 @@ class ActorMoviesScreen extends StatelessWidget {
                           // )),
                           // const ActorSocialMediaComponent(),
                             //todo: bio
+
+
                             const ActorBioComponent(),
                             //todo: MOVIES
                             SliverPadding(

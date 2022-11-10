@@ -4,6 +4,7 @@ import 'package:movie_app/movie_module/domain/entites/credits.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_details.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
+import 'package:movie_app/movie_module/domain/entites/movie_vedios.dart';
 import 'package:movie_app/movie_module/domain/entites/social_media.dart';
 import 'package:movie_app/movie_module/domain/usecase/search_movie_usecase.dart';
 
@@ -55,6 +56,8 @@ abstract class BaseMovieRepository{
   Future<Either<Failure ,List<Movie>>> getSeeMorePopularMovies(MovieParameters movieParameters);
 
   Future<Either<Failure ,List<Movie>>>  getTopRatedPopularMovies(MovieParameters movieParameters);
+
+  Future<Either<Failure ,List<Movie_Vedios>>>  getMovieVedios(MovieDetailsParameters movieDetailsParameters) ;
 
 
   

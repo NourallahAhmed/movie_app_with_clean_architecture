@@ -8,6 +8,7 @@ import 'package:movie_app/movie_module/domain/entites/movie.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_details.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
+import 'package:movie_app/movie_module/domain/entites/movie_vedios.dart';
 import 'package:movie_app/movie_module/domain/entites/social_media.dart';
 import 'package:movie_app/movie_module/domain/repository/BaseRepository.dart';
 
@@ -18,6 +19,7 @@ import 'package:movie_app/movie_module/domain/usecase/search_movie_usecase.dart'
 
 import '../../domain/usecase/get_movie_details_usecase.dart';
 import '../../domain/usecase/get_movie_recommendations_usecase.dart';
+import '../model/movie_vedios_model.dart';
 
 
 class MovieRepository implements BaseMovieRepository {
@@ -177,6 +179,16 @@ class MovieRepository implements BaseMovieRepository {
   Future<Either<Failure, List<Movie>>> getTopRatedPopularMovies(MovieParameters movieParameters) async {
     try {
       return Right(await baseRemoteDataSource.getSeeMoreTopRatedMovies(movieParameters));
+    }
+    on ServiceExceptions catch (failure){
+    return Left(ServerFailure(failure.errorMessage.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MovieVediosModel>>> getMovieVedios(MovieDetailsParameters movieDetailsParameters) async {
+    try {
+      return Right(await baseRemoteDataSource.getMovieVedios(movieDetailsParameters));
     }
     on ServiceExceptions catch (failure){
     return Left(ServerFailure(failure.errorMessage.statusMessage));

@@ -1,22 +1,18 @@
 import 'dart:async';
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/movie_module/domain/entites/credits.dart';
-import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
-import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
-import 'package:movie_app/movie_module/domain/entites/social_media.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_cast_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_recommendations_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_social_media.dart';
 import '../../../core/utils/enums.dart';
-import '../../domain/entites/movie_details.dart';
 import '../../domain/usecase/get_movie_details_usecase.dart';
 import '../../domain/usecase/get_movie_similar_usecase.dart';
+import '../../domain/usecase/get_movie_vedios_usecase.dart';
+import 'movie_details_state.dart';
 
 part 'movie_details_event.dart';
 
-part 'movie_details_state.dart';
+// part 'movie_details_state.dart';
 
 class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   GetMovieDetailsUseCase getMovieDetailsUseCase;
@@ -24,12 +20,16 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   GetMovieSimilarUseCase getMovieSimilarUseCase;
   GetMovieCastUseCase getMovieCastUseCase;
   GetMovieSocialMediaUseCase getMovieSocialMediaUseCase;
+  GetMovieVediosUseCase getMovieVediosUseCase;
+
+
 
       MovieDetailsBloc(this.getMovieDetailsUseCase,
   this.getMovieRecomendationsUseCase,
   this.getMovieSimilarUseCase,
    this.getMovieCastUseCase,
-          this.getMovieSocialMediaUseCase
+          this.getMovieSocialMediaUseCase,
+          this.getMovieVediosUseCase
   ):
   super(MovieDetailsState()) {
   on<GetMovieDetailsEvent>(_getMovieDetails);
@@ -37,6 +37,7 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   on<GetSimilarMovieEvent>(_getSimilarMovie);
   on<GetMovieCastEvent>(_getMovieCast);
   on<GetSocialMediaEvent>(_getSocialMedia);
+  on<GetMovieVediosEvent>(_getMovieVedios);
   }
 
   FutureOr<void> _getMovieDetails(GetMovieDetailsEvent event,
@@ -94,9 +95,7 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
         MovieDetailsParameters(event.id));
 
 
-    print("_getMovieCast");
 
-    print(result);
 
     result.fold((l) =>
         emit(state.copyWith(
@@ -114,9 +113,7 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
     final result = await getMovieSocialMediaUseCase(
         MovieDetailsParameters(event.id));
 
-    print("_getMovieCast");
 
-    print(result);
 
     result.fold((l) =>
         emit(state.copyWith(
@@ -126,5 +123,26 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
             emit(state.copyWith(
                 socialMediaState: RequestState.loaded,
                 socialMedia: r)));
+  }
+
+  FutureOr<void> _getMovieVedios(GetMovieVediosEvent event, Emitter<MovieDetailsState> emit) async  {
+
+    //function call() will be called automatically
+    final result = await getMovieVediosUseCase(
+        MovieDetailsParameters(event.id));
+
+    print("_getMovieVedios");
+
+    print(result);
+
+    result.fold((l) =>
+        emit(state.copyWith(
+            moviesVediosMessage: l.message,
+            moviesVediosState: RequestState.error)),
+            (r)  =>
+            emit(state.copyWith(
+                moviesVediosState: RequestState.loaded,
+                moviesVedios: r)));
+
   }
 }

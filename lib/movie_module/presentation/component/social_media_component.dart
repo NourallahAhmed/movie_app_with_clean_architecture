@@ -6,6 +6,7 @@ import '../../../core/utils/api_constants.dart';
 import '../../../core/utils/assets_images.dart';
 import '../../../core/utils/enums.dart';
 import '../../../core/utils/functions.dart';
+import '../controller/movie_details_state.dart';
 
 class SocialMediaComponent extends StatelessWidget {
   const SocialMediaComponent({Key? key}) : super(key: key);

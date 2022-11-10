@@ -1,4 +1,13 @@
-part of 'movie_details_bloc.dart';
+import 'package:equatable/equatable.dart';
+
+import '../../../core/utils/enums.dart';
+import '../../domain/entites/credits.dart';
+import '../../domain/entites/movie_details.dart';
+import '../../domain/entites/movie_recomendation.dart';
+import '../../domain/entites/movie_similar.dart';
+
+import '../../domain/entites/movie_vedios.dart';
+import '../../domain/entites/social_media.dart';
 
 class MovieDetailsState extends Equatable {
   //todo details
@@ -24,6 +33,11 @@ class MovieDetailsState extends Equatable {
   final String socialMediaMessage;
   final RequestState socialMediaState;
 
+
+  final List<Movie_Vedios> movieVedios;
+  final String movieVediosMessage;
+  final RequestState movieVediosState;
+
   MovieDetailsState({
     this.moviesDetails,
     this.moviesDetailsMessage = "",
@@ -40,6 +54,9 @@ class MovieDetailsState extends Equatable {
     this.socialMediaMovies,
     this.socialMediaMessage = "",
     this.socialMediaState = RequestState.loading,
+    this.movieVedios = const [],
+    this.movieVediosMessage = "",
+    this.movieVediosState = RequestState.loading,
   });
 
   MovieDetailsState copyWith({MovieDetails? moviesDetails,
@@ -59,27 +76,33 @@ class MovieDetailsState extends Equatable {
     String? socialMediaMessage,
     RequestState? socialMediaState,
 
+
+    List<Movie_Vedios>? moviesVedios,
+    String? moviesVediosMessage,
+    RequestState? moviesVediosState,
+
   }) {
     return MovieDetailsState(
-        moviesDetails: moviesDetails ?? this.moviesDetails,
-        moviesDetailsMessage: moviesDetailsMessage ?? this.moviesDetailsMessage,
-        moviesDetailsState: moviesDetailsState ?? this.moviesDetailsState,
-        moviesRecomendations: movieRecomednations ?? this.moviesRecomendations,
-        moviesRecomendationsMessage:
-        moviesRecomendationsMessage ?? this.moviesRecomendationsMessage,
-        moviesRecomendationsState:
-        moviesRecomendationsState ?? this.moviesRecomendationsState,
-        similarMovieMessage: similarMovieMessage ?? this.similarMovieMessage,
-        similarMovies: similarMovies ?? this.similarMovies,
-        similarMovieState: similarMovieState ?? this.similarMovieState,
-        creditsMovies: creditMovie ?? this.creditsMovies,
-        creditsMoviesMessage: creditMessage ?? this.creditsMoviesMessage,
-        creditsMoviesState: creditState ?? this.creditsMoviesState,
-        socialMediaMessage: socialMediaMessage ?? this.similarMovieMessage,
-        socialMediaState: socialMediaState ?? this.similarMovieState,
-        socialMediaMovies: socialMedia ?? this.socialMediaMovies
-
-
+      moviesDetails: moviesDetails ?? this.moviesDetails,
+      moviesDetailsMessage: moviesDetailsMessage ?? this.moviesDetailsMessage,
+      moviesDetailsState: moviesDetailsState ?? this.moviesDetailsState,
+      moviesRecomendations: movieRecomednations ?? this.moviesRecomendations,
+      moviesRecomendationsMessage:
+      moviesRecomendationsMessage ?? this.moviesRecomendationsMessage,
+      moviesRecomendationsState:
+      moviesRecomendationsState ?? this.moviesRecomendationsState,
+      similarMovieMessage: similarMovieMessage ?? this.similarMovieMessage,
+      similarMovies: similarMovies ?? this.similarMovies,
+      similarMovieState: similarMovieState ?? this.similarMovieState,
+      creditsMovies: creditMovie ?? this.creditsMovies,
+      creditsMoviesMessage: creditMessage ?? this.creditsMoviesMessage,
+      creditsMoviesState: creditState ?? this.creditsMoviesState,
+      socialMediaMessage: socialMediaMessage ?? this.similarMovieMessage,
+      socialMediaState: socialMediaState ?? this.similarMovieState,
+      socialMediaMovies: socialMedia ?? this.socialMediaMovies,
+      movieVedios: moviesVedios ?? this.movieVedios,
+      movieVediosMessage: moviesVediosMessage ?? this.movieVediosMessage,
+      movieVediosState: moviesVediosState ?? this.movieVediosState,
     );
   }
 
@@ -101,5 +124,8 @@ class MovieDetailsState extends Equatable {
         socialMediaMovies,
         socialMediaMessage,
         socialMediaState,
+        movieVedios,
+        movieVediosMessage,
+        movieVediosState,
       ];
 }

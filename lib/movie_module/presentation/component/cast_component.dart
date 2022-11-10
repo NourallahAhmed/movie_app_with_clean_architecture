@@ -7,6 +7,7 @@ import '../../../core/utils/api_constants.dart';
 import '../../../core/utils/enums.dart';
 import '../../domain/entites/cast.dart';
 import '../controller/movie_details_bloc.dart';
+import '../controller/movie_details_state.dart';
 import '../screens/actor_movies_screen.dart';
 
 class CastComponent extends StatelessWidget{

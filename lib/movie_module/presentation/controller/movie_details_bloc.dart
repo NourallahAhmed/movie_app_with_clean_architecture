@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_cast_usecase.dart';
+import 'package:movie_app/movie_module/domain/usecase/get_movie_images_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_recommendations_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_social_media.dart';
 import '../../../core/utils/enums.dart';
@@ -21,6 +22,7 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   GetMovieCastUseCase getMovieCastUseCase;
   GetMovieSocialMediaUseCase getMovieSocialMediaUseCase;
   GetMovieVediosUseCase getMovieVediosUseCase;
+  GetMovieImagesUseCase getMovieImagesUseCase;
 
 
 
@@ -29,7 +31,8 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   this.getMovieSimilarUseCase,
    this.getMovieCastUseCase,
           this.getMovieSocialMediaUseCase,
-          this.getMovieVediosUseCase
+          this.getMovieVediosUseCase,
+          this.getMovieImagesUseCase
   ):
   super(MovieDetailsState()) {
   on<GetMovieDetailsEvent>(_getMovieDetails);
@@ -38,6 +41,7 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   on<GetMovieCastEvent>(_getMovieCast);
   on<GetSocialMediaEvent>(_getSocialMedia);
   on<GetMovieVediosEvent>(_getMovieVedios);
+  on<GetMovieImagesEvent>(_getMovieImagse);
   }
 
   FutureOr<void> _getMovieDetails(GetMovieDetailsEvent event,
@@ -143,6 +147,26 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
             emit(state.copyWith(
                 moviesVediosState: RequestState.loaded,
                 moviesVedios: r)));
+
+  }
+
+  FutureOr<void> _getMovieImagse(GetMovieImagesEvent event, Emitter<MovieDetailsState> emit) async {
+
+    final result = await getMovieImagesUseCase(
+        MovieDetailsParameters(event.id));
+
+    print("_getMovieVedios");
+
+    print(result);
+
+    result.fold((l) =>
+        emit(state.copyWith(
+            moviesImagesMessage: l.message,
+            moviesImagesState: RequestState.error)),
+            (r)  =>
+            emit(state.copyWith(
+                moviesImagesState: RequestState.loaded,
+                moviesImages: r)));
 
   }
 }

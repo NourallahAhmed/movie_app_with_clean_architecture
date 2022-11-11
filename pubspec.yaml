@@ -77,6 +77,8 @@ flutter:
       - assets/images/instagram.png
       - assets/images/facebook.png
       - assets/images/twitter.png
+      - assets/images/person.png
+      - assets/images/movie_placholder.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

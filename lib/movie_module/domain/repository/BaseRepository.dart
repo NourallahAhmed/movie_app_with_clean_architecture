@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:movie_app/core/base_usecase/base_usecase.dart';
 import 'package:movie_app/movie_module/domain/entites/credits.dart';
+import 'package:movie_app/movie_module/domain/entites/images.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_details.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_recomendation.dart';
 import 'package:movie_app/movie_module/domain/entites/movie_similar.dart';
@@ -58,6 +59,8 @@ abstract class BaseMovieRepository{
   Future<Either<Failure ,List<Movie>>>  getTopRatedPopularMovies(MovieParameters movieParameters);
 
   Future<Either<Failure ,List<Movie_Vedios>>>  getMovieVedios(MovieDetailsParameters movieDetailsParameters) ;
+
+  Future<Either<Failure ,List<MovieImages>>>  getMovieImages(MovieDetailsParameters movieDetailsParameters);
 
 
   

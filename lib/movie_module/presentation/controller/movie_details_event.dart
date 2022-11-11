@@ -71,3 +71,15 @@ class GetMovieVediosEvent extends MovieDetailsEvent{
   List<Object?> get props => [id];
 
 }
+
+class GetMovieImagesEvent extends MovieDetailsEvent{
+
+  final int id;
+
+  GetMovieImagesEvent(this.id);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id];
+
+}

@@ -9,7 +9,7 @@ class MovieDetailsModel extends MovieDetails{
     print(map);
     return MovieDetailsModel(
         id: map["id"],
-        posterPath: map["poster_path"] ?? "/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg",
+        posterPath: map["poster_path"] ?? "",
         title: map["title"],
         overview: map["overview"],
         releaseDate: map["release_date"],

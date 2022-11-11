@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:movie_app/movie_module/domain/entites/images.dart';
 
 import '../../../core/utils/enums.dart';
 import '../../domain/entites/credits.dart';
@@ -37,6 +38,9 @@ class MovieDetailsState extends Equatable {
   final List<Movie_Vedios> movieVedios;
   final String movieVediosMessage;
   final RequestState movieVediosState;
+  final List<MovieImages>? moviesImages;
+  final String? moviesImagesMessage;
+  final RequestState moviesImagesState;
 
   MovieDetailsState({
     this.moviesDetails,
@@ -57,6 +61,11 @@ class MovieDetailsState extends Equatable {
     this.movieVedios = const [],
     this.movieVediosMessage = "",
     this.movieVediosState = RequestState.loading,
+
+
+    this.moviesImages = const [],
+    this.moviesImagesMessage = "",
+    this.moviesImagesState = RequestState.loading,
   });
 
   MovieDetailsState copyWith({MovieDetails? moviesDetails,
@@ -81,6 +90,10 @@ class MovieDetailsState extends Equatable {
     String? moviesVediosMessage,
     RequestState? moviesVediosState,
 
+    List<MovieImages>? moviesImages,
+    String? moviesImagesMessage,
+    RequestState? moviesImagesState,
+
   }) {
     return MovieDetailsState(
       moviesDetails: moviesDetails ?? this.moviesDetails,
@@ -103,6 +116,10 @@ class MovieDetailsState extends Equatable {
       movieVedios: moviesVedios ?? this.movieVedios,
       movieVediosMessage: moviesVediosMessage ?? this.movieVediosMessage,
       movieVediosState: moviesVediosState ?? this.movieVediosState,
+      moviesImages: moviesImages ?? this.moviesImages,
+      moviesImagesMessage:  moviesImagesMessage ?? this.moviesImagesMessage,
+      moviesImagesState:  moviesImagesState ?? this. moviesImagesState,
+
     );
   }
 
@@ -127,5 +144,8 @@ class MovieDetailsState extends Equatable {
         movieVedios,
         movieVediosMessage,
         movieVediosState,
+        moviesImages,
+        moviesImagesMessage,
+        moviesImagesState,
       ];
 }

@@ -19,43 +19,57 @@ class MovieTrailer extends StatelessWidget {
           );
 
         case RequestState.loaded:
-          
-          var movieTrailer = state.movieVedios.firstWhere((element) => element.type == "Trailer");
-          
-          
-          YoutubePlayerController youTubeController = YoutubePlayerController(
-            initialVideoId: movieTrailer.key,
-
-            flags: const  YoutubePlayerFlags(
-              autoPlay: false,
-              mute: false,
-            ),
-
-          );
-          return  YoutubePlayerBuilder(
-              player: YoutubePlayer(
-
-                controller: youTubeController,
-                showVideoProgressIndicator: true,
-                progressIndicatorColor: Colors.amber,
-                progressColors: const ProgressBarColors(
-                  playedColor: Colors.amber,
-                  handleColor: Colors.amberAccent,
-                ),
+          if (state.movieVedios.isNotEmpty) {
+            var movieTrailer = state.movieVedios
+                .firstWhere((element) => element.type == "Trailer");
+            YoutubePlayerController youTubeController = YoutubePlayerController(
+              initialVideoId: movieTrailer.key,
+              flags: const YoutubePlayerFlags(
+                autoPlay: false,
+                mute: false,
               ),
-              builder: (context, player) {
-                return GestureDetector(
-                  child: player,
-                  onTap: () {
-                    if (youTubeController.value.playerState == PlayerState.paused) {
-                      youTubeController.play();
-                    } else {
-                      youTubeController.pause();
-                    }
-                    ;
-                  },
-                );
-              });
+            );
+            return YoutubePlayerBuilder(
+                player: YoutubePlayer(
+                  controller: youTubeController,
+                  showVideoProgressIndicator: true,
+                  progressIndicatorColor: Colors.amber,
+                  progressColors: const ProgressBarColors(
+                    playedColor: Colors.amber,
+                    handleColor: Colors.amberAccent,
+                  ),
+                ),
+                builder: (context, player) {
+                  return GestureDetector(
+                    child: player,
+                    onTap: () {
+                      if (youTubeController.value.playerState ==
+                          PlayerState.paused) {
+                        youTubeController.play();
+                      } else {
+                        youTubeController.pause();
+                      }
+                      ;
+                    },
+                  );
+                });
+          } else {
+            return  Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                 Text("No supported Trailer found"),
+
+                 Padding(
+                   padding: EdgeInsets.all(8.0),
+                   child: Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    ),
+                 )
+              ],
+            );
+          }
+
         case RequestState.error:
           return Center(
             child: Text(state.movieVediosMessage),

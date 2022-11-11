@@ -5,11 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/core/services/service_locator.dart';
 import 'package:movie_app/core/utils/api_constants.dart';
+import 'package:movie_app/core/utils/app_String.dart';
 import 'package:movie_app/core/utils/app_constants.dart';
 import 'package:movie_app/core/utils/enums.dart';
+import 'package:movie_app/movie_module/presentation/component/movie_images_component.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_details_bloc.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../core/utils/assets_images.dart';
 import '../../domain/entites/genres.dart';
 import '../component/cast_component.dart';
 import '../component/movie_trailer_component.dart';
@@ -30,7 +33,8 @@ class MovieDetailScreen extends StatelessWidget {
           ..add(GetSimilarMovieEvent(id))
           ..add(GetMovieCastEvent(id))
           ..add(GetMovieVediosEvent(id))
-          ..add(GetSocialMediaEvent(id)),
+          ..add(GetSocialMediaEvent(id))
+          ..add(GetMovieImagesEvent(id)),
         child: const Scaffold(
           body: MovieDetailContent(),
         ));
@@ -56,13 +60,14 @@ class MovieDetailContent extends StatelessWidget {
             key: const Key('movieDetailScrollView'),
             slivers: [
               SliverAppBar(
+                backgroundColor: Colors.transparent,
                 actions: [
                   IconButton(onPressed: () async {
                     final box = context.findRenderObject() as RenderBox?;
                     var movieTrailer = state.movieVedios.firstWhere((element) => element.type == "Trailer");
 
                     await Share.share(
-                      "  _  Home of Movies  _ \n Lets watch ${state.moviesDetails?.title} together\n \n"
+                      "  _  Home of Movies  _ \nLets watch ${state.moviesDetails?.title} together\n \n"
                           "see the trailer : ${ApiConstants.youtubeTrailer(movieTrailer.key)}",
 
 
@@ -99,6 +104,11 @@ class MovieDetailContent extends StatelessWidget {
                         imageUrl: ApiConstants.imageUrl(
                             state.moviesDetails!.posterPath!),
                         fit: BoxFit.cover,
+                        errorWidget: (context, url, error) =>
+                            SizedBox(
+                                height: 100,
+                                width: 150,
+                                child: Image.asset(AssetsImages.moviePlaceholder)),
                       ),
                     ),
                   ),
@@ -236,7 +246,7 @@ class MovieDetailContent extends StatelessWidget {
                     from: 20,
                     duration: const Duration(milliseconds: 500),
                     child: Text(
-                      'Cast'.toUpperCase(),
+                      AppString.cast.toUpperCase(),
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500,
@@ -263,7 +273,7 @@ class MovieDetailContent extends StatelessWidget {
                     from: 20,
                     duration: const Duration(milliseconds: 500),
                     child: Text(
-                      'Trailer'.toUpperCase(),
+                      AppString.trailer.toUpperCase(),
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500,
@@ -288,6 +298,8 @@ class MovieDetailContent extends StatelessWidget {
                 ),
               ),
 
+
+              //similar
               SliverPadding(
                 padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
                 sliver: SliverToBoxAdapter(
@@ -295,7 +307,39 @@ class MovieDetailContent extends StatelessWidget {
                     from: 20,
                     duration: const Duration(milliseconds: 500),
                     child: Text(
-                      'Similar'.toUpperCase(),
+                      AppString.poster.toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              // Images
+              SliverPadding(padding: EdgeInsets.all(9.0),
+
+              sliver:   SliverToBoxAdapter(
+
+                child: FadeInUp(
+                  from: 20,
+                  duration: const Duration(milliseconds: 500),
+                  child: const MovieImagesComponent(),
+                ),
+              ),
+              ),
+
+              //similar
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
+                sliver: SliverToBoxAdapter(
+                  child: FadeInUp(
+                    from: 20,
+                    duration: const Duration(milliseconds: 500),
+                    child: Text(
+                      AppString.similar.toUpperCase(),
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500,
@@ -311,6 +355,7 @@ class MovieDetailContent extends StatelessWidget {
                   sliver: _showSimilar()
                   ),
 
+              //recommendation
               SliverPadding(
                 padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
                 sliver: SliverToBoxAdapter(
@@ -318,7 +363,7 @@ class MovieDetailContent extends StatelessWidget {
                     from: 20,
                     duration: const Duration(milliseconds: 500),
                     child: Text(
-                      'Recommendations'.toUpperCase(),
+                      AppString.recommendation.toUpperCase(),
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500,
@@ -380,6 +425,11 @@ class MovieDetailContent extends StatelessWidget {
                 height: 560.0,
                 imageUrl: ApiConstants.imageUrl(recommendation.path),
                 fit: BoxFit.cover,
+                errorWidget: (context, url, error) =>
+                  SizedBox(
+                      height: 100,
+                      width: 150,
+                      child: Image.asset(AssetsImages.moviePlaceholder)),
               ),
               onTap: () {
                 Navigator.pushReplacement(
@@ -415,6 +465,11 @@ class MovieDetailContent extends StatelessWidget {
                 height: 560.0,
                 imageUrl: ApiConstants.imageUrl(recommendation.path),
                 fit: BoxFit.cover,
+                errorWidget: (context, url, error) =>
+                    SizedBox(
+                        height: 100,
+                        width: 150,
+                        child: Image.asset(AssetsImages.moviePlaceholder)),
               ),
               onTap: () {
                 Navigator.pushReplacement(

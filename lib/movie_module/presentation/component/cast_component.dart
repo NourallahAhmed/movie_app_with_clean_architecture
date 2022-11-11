@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/utils/api_constants.dart';
+import '../../../core/utils/app_constants.dart';
+import '../../../core/utils/assets_images.dart';
 import '../../../core/utils/enums.dart';
 import '../../domain/entites/cast.dart';
 import '../controller/movie_details_bloc.dart';
@@ -54,9 +56,7 @@ class CastComponent extends StatelessWidget{
                     final cast = state.creditsMovies!.cast[index];
                     return Padding(
                       padding: const EdgeInsets.only(right: 8.0 , left:  8.0 , bottom: 10.0) ,
-
                       child: Container(
-                        // margin: EdgeInsets.only(top: 9),
                         padding: const EdgeInsets.only(bottom:  25.0) ,
                         decoration:  const  BoxDecoration(
                            color: Colors.black12 ,
@@ -70,8 +70,8 @@ class CastComponent extends StatelessWidget{
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
+
                                 CachedNetworkImage(
-                                  // width: 120.0,
                                   fit: BoxFit.fill,
                                   imageUrl: ApiConstants.imageUrl(cast.image! ),
                                   imageBuilder: (context, imageProvider) => Container(
@@ -79,8 +79,7 @@ class CastComponent extends StatelessWidget{
                                     height: 150.0,
                                     decoration: BoxDecoration(
                                         borderRadius: const  BorderRadius.all(Radius.circular(10)),
-                                      image: DecorationImage(
-                                          image: imageProvider, fit: BoxFit.fill),
+                                        image: DecorationImage( image: imageProvider, fit: BoxFit.cover),
                                     ),
                                   ),
                                   placeholder: (context, url) => Shimmer.fromColors(
@@ -96,16 +95,27 @@ class CastComponent extends StatelessWidget{
                                     ),
                                   ),
                                   errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                                      SizedBox(
+                                          height: 100,
+                                          width: 150,
+                                          child: Image.asset(AssetsImages.person)),
 
                                 ),
 
                                 const SizedBox(height: 10,) ,
 
                                 Text(cast.name!),
+
                                 const SizedBox(height: 10,) ,
-                                // Text("in \n"),
-                                cast.character!.contains("/") ? Text(cast.character!.substring(0 ,  cast.character!.indexOf("/")  )) : Text(cast.character!)
+
+                                cast.character!.contains("/") ? Text(
+
+                                    cast.character!.substring(0 ,  cast.character!.indexOf("/")
+
+                                    )
+                                ,style: TextStyle(color: AppConstants.charcterColor ),) :
+
+                                Text(cast.character! , style: TextStyle(color: AppConstants.charcterColor ))
                               ]
                             ),
 

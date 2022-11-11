@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/movie_module/presentation/controller/actor_movies_bloc.dart';
 
+import '../../../core/utils/app_String.dart';
 import '../../../core/utils/enums.dart';
 import 'package:readmore/readmore.dart';
 
@@ -55,7 +56,7 @@ class ActorBioComponent extends StatelessWidget {
                             :  Container(),
                         const SizedBox(height: 8.0),
                         state.actorDetails!.biography != "" ?
-                        const Text("Biography :" ?? " ",
+                        const Text( AppString.bio ?? " ",
                             style:  TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,

@@ -8,6 +8,7 @@ import 'package:movie_app/movie_module/presentation/controller/actor_movies_bloc
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/utils/api_constants.dart';
+import '../../../core/utils/assets_images.dart';
 import '../../../core/utils/enums.dart';
 import '../../domain/entites/cast.dart';
 import '../component/actor_bio_component.dart';
@@ -99,18 +100,7 @@ class ActorMoviesScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          //   SliverToBoxAdapter(
-                          //     child: FadeInUp(
-                          //   from: 20,
-                          //   duration: const Duration(milliseconds: 500),
-                          //   child: Text(state.actorDetails?.name ?? "",
-                          //       style: GoogleFonts.poppins(
-                          //         fontSize: 23,
-                          //         fontWeight: FontWeight.w700,
-                          //         letterSpacing: 1.2,
-                          //       )),
-                          // )),
-                          // const ActorSocialMediaComponent(),
+
                             //todo: bio
 
 
@@ -148,6 +138,11 @@ class ActorMoviesScreen extends StatelessWidget {
                       height: 560.0,
                       imageUrl: ApiConstants.imageUrl(movie.posterPath ?? ""),
                       fit: BoxFit.cover,
+                      errorWidget: (context, url, error) =>
+                          SizedBox(
+                              height: 100,
+                              width: 150,
+                              child: Image.asset(AssetsImages.moviePlaceholder)),
                     ),
                     onTap: (){
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(id: movie.id!)));

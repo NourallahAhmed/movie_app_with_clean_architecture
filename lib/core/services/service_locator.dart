@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_actor_movies_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_cast_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_details_usecase.dart';
+import 'package:movie_app/movie_module/domain/usecase/get_movie_images_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_recommendations_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_similar_usecase.dart';
 import 'package:movie_app/movie_module/domain/usecase/get_movie_social_media.dart';
@@ -37,7 +38,7 @@ class ServiceLocator{
     serviceLocator.registerFactory(() => SearchBloc(serviceLocator()));
 
     //todo: MovieDetailsBloc
-    serviceLocator.registerFactory(() => MovieDetailsBloc(serviceLocator(),serviceLocator() , serviceLocator() ,serviceLocator() , serviceLocator(), serviceLocator()));
+    serviceLocator.registerFactory(() => MovieDetailsBloc(serviceLocator(),serviceLocator() , serviceLocator() ,serviceLocator() ,serviceLocator() , serviceLocator(), serviceLocator()));
 
     //todo: SeeMoreMovieBloc
     serviceLocator.registerFactory(() => SeemoreMoviesBloc(serviceLocator(),serviceLocator(), ));
@@ -108,6 +109,10 @@ class ServiceLocator{
     //todo: Get movieVedios UseCase
 
     serviceLocator.registerLazySingleton<GetMovieVediosUseCase>(() =>  GetMovieVediosUseCase(serviceLocator()));
+
+    //todo: Get movieVedios UseCase
+
+    serviceLocator.registerLazySingleton<GetMovieImagesUseCase>(() =>  GetMovieImagesUseCase(serviceLocator()));
 
 
 

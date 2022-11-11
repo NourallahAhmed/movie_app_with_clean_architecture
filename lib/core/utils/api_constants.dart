@@ -57,6 +57,10 @@ class ApiConstants{
 
   static String getVedios(int id) => "${baseURL}/movie/${id}/videos?api_key=${apiKey}";
 
+  //todo getImages
+
+  static String getImages(int id) => "${baseURL}/movie/${id}/images?api_key=${apiKey}";
+
 
   //Todo youTube
   static String youtubeTrailer(String key ) => "https://www.youtube.com/watch?v=${key}";

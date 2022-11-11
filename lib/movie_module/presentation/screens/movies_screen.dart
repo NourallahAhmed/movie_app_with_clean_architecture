@@ -9,6 +9,7 @@ import 'package:movie_app/movie_module/presentation/component/top_rated_componen
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_bloc_event.dart';
 import 'package:movie_app/movie_module/presentation/screens/seemore_popular_screen.dart';
+import '../../../core/utils/app_String.dart';
 import '../component/search_bar_component.dart';
 import '../component/upcoming_component.dart';
 
@@ -25,7 +26,7 @@ class MainMoviesScreen extends StatelessWidget {
         ..add(GetTopRatedMovieEvent())
         ..add(GetUpComingEvent()),
       child: Scaffold(
-        appBar: AppBar(title: Text("Movies"),
+        appBar: AppBar(title: const Text(AppString.appTitle),
   backgroundColor: Colors.transparent,
 
           actions: [
@@ -38,8 +39,10 @@ class MainMoviesScreen extends StatelessWidget {
                   delegate: CustomSearchDelegate());
             },
             icon: const Icon(Icons.search),
-          )
-        ]
+          ),
+            IconButton(onPressed: (){}, icon: Icon(Icons.light_mode))
+
+          ]
           ),
         body: SingleChildScrollView(
           key: const Key('movieScrollView'),
@@ -53,7 +56,7 @@ class MainMoviesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Popular",
+                      AppString.popular,
                       style: GoogleFonts.poppins(
                         fontSize: 19,
                         fontWeight: FontWeight.w500,
@@ -69,7 +72,7 @@ class MainMoviesScreen extends StatelessWidget {
                         child: Row(
                           children:  [
                             GestureDetector(
-                              child: const Text('See More') ,
+                              child: const Text(AppString.seeMore) ,
                               onTap:  (){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const  SeeMorePopularScreen()));
                             },),
@@ -96,30 +99,30 @@ class MainMoviesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Top Rated",
+                      AppString.topRated,
                       style: GoogleFonts.poppins(
                         fontSize: 19,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.15,
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        /// TODO : NAVIGATION TO Top Rated Movies Screen
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: const [
-                            Text('See More'),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              size: 16.0,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     /// TODO : NAVIGATION TO Top Rated Movies Screen
+                    //   },
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.all(8.0),
+                    //     child: Row(
+                    //       children: const [
+                    //         Text('See More'),
+                    //         Icon(
+                    //           Icons.arrow_forward_ios,
+                    //           size: 16.0,
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -135,30 +138,30 @@ class MainMoviesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "UpComing ",
+                     AppString.upComing,
                       style: GoogleFonts.poppins(
                         fontSize: 19,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.15,
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        /// TODO : NAVIGATION TO Top Rated Movies Screen
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: const [
-                            Text('See More'),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              size: 16.0,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     /// TODO : NAVIGATION TO Top Rated Movies Screen
+                    //   },
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.all(8.0),
+                    //     child: Row(
+                    //       children: const [
+                    //         Text('See More'),
+                    //         Icon(
+                    //           Icons.arrow_forward_ios,
+                    //           size: 16.0,
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

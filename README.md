@@ -13,14 +13,16 @@ User can naviagte to each movie shows the overview of movie story and the cast a
 - Google fonts
 - Carousel_slider
 - Cached network image
+- youtube_player_flutter 
 
 # Simples
 
 
 
 
+
   - Home Page
-   <img src="https://user-images.githubusercontent.com/87453033/200193344-dd32acfd-7adb-4067-af7e-0bb58bccea53.jpg" width="243" height="528">      
+   <img src="https://user-images.githubusercontent.com/87453033/200975571-257989e6-6ff1-48c3-a765-8637487e7398.jpg" width="243" height="528">      
    
    
 
@@ -29,23 +31,36 @@ User can naviagte to each movie shows the overview of movie story and the cast a
    
    
    - Movie details page
-
    
-   <img src="https://user-images.githubusercontent.com/87453033/200193198-86981367-bdb9-47ce-a804-e0b2286536e5.jpg" width="243" height="528">
-
+   <img src="https://user-images.githubusercontent.com/87453033/200975589-889ef842-3b3a-4d28-a5b6-4d29ab063c80.jpg" width="243" height="528">
+   
+   
+   <img src="https://user-images.githubusercontent.com/87453033/200975699-ef3a7722-3c7e-4fd3-8239-02593144a6ca.jpg" width="243" height="528">
+   
+   
+   
   - Similar Movie
 
    <img src="https://user-images.githubusercontent.com/87453033/200193253-8777b7e0-04a5-49ee-aaf8-3535f5f2d839.jpg" width="243" height="528">        
    
   - Recommendation Movies
 
-
    <img src="https://user-images.githubusercontent.com/87453033/200193260-d15361ee-43e1-49e6-8800-d974ee3510b2.jpg" width="243" height="528">
-
-
 
 
  - Actor Details
 
-   <img src="https://user-images.githubusercontent.com/87453033/200193283-96b44fe0-5c24-4e96-b24f-e80bf23171e2.jpg" width="243" height="528">
+   <img src="https://user-images.githubusercontent.com/87453033/200976519-b92fccf7-5fa9-40e7-9fcd-2e140bc968e8.jpg" width="243" height="528">
 
+
+- Search Screen
+
+   <img src="https://user-images.githubusercontent.com/87453033/200975799-aea6259f-1824-4c78-b362-70b8d5963f94.jpg" width="243" height="528">
+
+
+
+- Share Feature
+
+   <img src="https://user-images.githubusercontent.com/87453033/200975827-f1d3d7f3-520c-4dca-951d-570c7ee59c5c.jpg" width="243" height="528">
+   
+   

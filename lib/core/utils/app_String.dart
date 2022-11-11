@@ -12,4 +12,6 @@ class AppString{
   static const similar = "Similar ";
   static const recommendation = "Recommendation";
   static const bio = "Biography";
+  static const videoError = "No supported Trailer found";
+  static const postersError = "No supported Posters found";
 }

@@ -95,7 +95,8 @@ class CastComponent extends StatelessWidget{
                                     ),
                                   ),
                                   errorWidget: (context, url, error) =>
-                                      SizedBox(
+                                      Container(
+                                          color: Colors.white,
                                           height: 100,
                                           width: 150,
                                           child: Image.asset(AssetsImages.person)),
@@ -113,9 +114,9 @@ class CastComponent extends StatelessWidget{
                                     cast.character!.substring(0 ,  cast.character!.indexOf("/")
 
                                     )
-                                ,style: TextStyle(color: AppConstants.charcterColor ),) :
+                                ,/*style: TextStyle(color: AppConstants.charcterColor ),*/) :
 
-                                Text(cast.character! , style: TextStyle(color: AppConstants.charcterColor ))
+                                Text(cast.character! /*, style: TextStyle(color: AppConstants.charcterColor )*/)
                               ]
                             ),
 

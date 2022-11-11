@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_details_bloc.dart';
 import 'package:movie_app/movie_module/presentation/controller/movie_details_state.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import '../../../core/utils/app_String.dart';
 import '../../../core/utils/enums.dart';
 
 class MovieTrailer extends StatelessWidget {
@@ -57,7 +58,7 @@ class MovieTrailer extends StatelessWidget {
             return  Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                 Text("No supported Trailer found"),
+                 Text( AppString.videoError ),
 
                  Padding(
                    padding: EdgeInsets.all(8.0),

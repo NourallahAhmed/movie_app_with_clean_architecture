@@ -146,11 +146,11 @@ class MovieDetailContent extends StatelessWidget {
                               ),
                               child: Text(
                                 state.moviesDetails!.releaseDate.split('-')[0],
-                                style: const TextStyle(
+                                /*style: const TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w500,
                                   color: AppConstants.titleColor,
-                                ),
+                                ),*/
                               ),
                             ),
                             // const SizedBox(width: 16.0),
@@ -206,12 +206,12 @@ class MovieDetailContent extends StatelessWidget {
                           ),
                           child: Text(
                             _showDuration(state.moviesDetails!.runTime),
-                            style: const TextStyle(
+                            /*style: const TextStyle(
                               color: AppConstants.titleColor,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w500,
                               letterSpacing: 1.2,
-                            ),
+                            ),*/
                           ),
                         ),
                         const SizedBox(height: 20.0),
@@ -226,12 +226,12 @@ class MovieDetailContent extends StatelessWidget {
                         const SizedBox(height: 8.0),
                         Text(
                           'Genres: ${_showGenres(state.moviesDetails!.genre)}',
-                          style: const TextStyle(
+                         /* style: const TextStyle(
                             color: AppConstants.titleColor,
                             fontSize: 12.0,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 1.2,
-                          ),
+                          ),*/
                         ),
                       ],
                     ),

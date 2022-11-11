@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/utils/app_String.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/utils/api_constants.dart';
@@ -64,7 +65,7 @@ class MovieImagesComponent extends StatelessWidget {
            return Row(
              mainAxisAlignment: MainAxisAlignment.center,
              children: const [
-               Text("No supported Posters found"),
+               Text(AppString.postersError),
                Icon(Icons.error_outline , color: Colors.red,)
 
              ],

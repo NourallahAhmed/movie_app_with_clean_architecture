@@ -45,7 +45,7 @@ class ActorBioComponent extends StatelessWidget {
 
                         const ActorSocialMediaComponent(),
 
-                        state.actorDetails!.placeOfBirth != "" ?
+                        state.actorDetails!.placeOfBirth != "" || state.actorDetails!.birthday! !=  "" ?
 
                         Text("Born at the ${state.actorDetails?.placeOfBirth ?? ""} in  ${state.actorDetails?.birthday ?? ""} " ?? "",
                             style: const TextStyle(
@@ -68,7 +68,6 @@ class ActorBioComponent extends StatelessWidget {
                         ReadMoreText(
                         state.actorDetails!.biography,
                           trimLines: 5,
-                          style: const TextStyle(color: Colors.black),
                           colorClickableText: Colors.blue,
                           trimMode: TrimMode.Line,
                           trimCollapsedText: '...See more',

@@ -5,12 +5,6 @@ import 'package:movie_app/movie_module/presentation/component/search_result_comp
 import 'package:movie_app/movie_module/presentation/controller/search_bloc.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
-// Demo list to show querying
-  List<String> searchTerms = [
-    "",
-    "",
-
-  ];
 
 // first overwrite to
 // clear the search text
@@ -21,7 +15,7 @@ class CustomSearchDelegate extends SearchDelegate {
         onPressed: () {
           query = '';
         },
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
       ),
     ];
   }
@@ -33,7 +27,7 @@ class CustomSearchDelegate extends SearchDelegate {
       onPressed: () {
         close(context, null);
       },
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
     );
   }
 
@@ -42,46 +36,24 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     print(query);
     List<String> matchQuery = [];
-    // for (var fruit in searchTerms) {
-    //   if (fruit.toLowerCase().contains(query.toLowerCase())) {
-    //     matchQuery.add(fruit);
-    //   }
-    // }
     return BlocProvider(
       create: (context) => serviceLocator<SearchBloc>()..add(SearchMovieEvent(query)),
       child: search_result_component(),
     );
-    // return ListView.builder(
-    //   itemCount: matchQuery.length,
-    //   itemBuilder: (context, index) {
-    //     var result = matchQuery[index];
-    //     return ListTile(
-    //       title: Text(result),
-    //     );
-    //   },
-    // );
   }
 
 // last overwrite to show the
 // querying process at the runtime
   @override
   Widget buildSuggestions(BuildContext context) {
-    
-    //todo : search for top search in api 
-    List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if (fruit.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(fruit);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
+
+    //todo : search for top search in api
+    // List<String> matchQuery = [];
+    // for (var fruit in searchTerms) {
+    //   if (fruit.toLowerCase().contains(query.toLowerCase())) {
+    //     matchQuery.add(fruit);
+    //   }
+    // }
+    return Container();
   }
 }

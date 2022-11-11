@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_app/core/global/themes/light_theme.dart';
 import 'package:movie_app/core/services/service_locator.dart';
+import 'package:movie_app/core/utils/app_constants.dart';
 import 'package:movie_app/movie_module/presentation/component/now_playing_component.dart';
 import 'package:movie_app/movie_module/presentation/component/popular_component.dart';
 import 'package:movie_app/movie_module/presentation/component/top_rated_component.dart';
@@ -40,7 +42,10 @@ class MainMoviesScreen extends StatelessWidget {
             },
             icon: const Icon(Icons.search),
           ),
-            IconButton(onPressed: (){}, icon: Icon(Icons.light_mode))
+            IconButton(onPressed: (){
+
+
+            }, icon: Icon(Icons.light_mode))
 
           ]
           ),
@@ -101,28 +106,13 @@ class MainMoviesScreen extends StatelessWidget {
                     Text(
                       AppString.topRated,
                       style: GoogleFonts.poppins(
+
                         fontSize: 19,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.15,
                       ),
                     ),
-                    // InkWell(
-                    //   onTap: () {
-                    //     /// TODO : NAVIGATION TO Top Rated Movies Screen
-                    //   },
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.all(8.0),
-                    //     child: Row(
-                    //       children: const [
-                    //         Text('See More'),
-                    //         Icon(
-                    //           Icons.arrow_forward_ios,
-                    //           size: 16.0,
-                    //         )
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
+
                   ],
                 ),
               ),

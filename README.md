@@ -15,47 +15,56 @@ User can naviagte to each movie shows the overview of movie story and the cast a
 - Cached network image
 - youtube_player_flutter 
 
-# Simples
-
-
-
+# Samples
 
 
   - Home Page
-   <img src="https://user-images.githubusercontent.com/87453033/200975571-257989e6-6ff1-48c3-a765-8637487e7398.jpg" width="243" height="528">      
+   <img src="https://user-images.githubusercontent.com/87453033/201451535-764d6c3a-d22a-41ce-bdda-03d22ac3ccbd.jpg" width="243" height="528">     
    
+     
+
+   <img src="https://user-images.githubusercontent.com/87453033/201451549-01e2c017-5ab1-43b6-9234-44714b5a6489.jpg" width="243" height="528">     
+   
+   
+   
+   
+   - Seemore page
+
+
+   <img src="https://user-images.githubusercontent.com/87453033/201451594-3360efd2-4243-499b-83af-9f485efb5dc1.jpg" width="243" height="528">
+
+
+
+   - Movie details page
+
+   <img src="https://user-images.githubusercontent.com/87453033/201451645-49944e49-05b7-4202-aebc-8a46832bc280.jpg" width="243" height="528">
    
 
-   <img src="https://user-images.githubusercontent.com/87453033/200193165-40dfe9e4-b17f-402b-9ef7-50d3c80a06a5.jpg" width="243" height="528">     
+   <img src="https://user-images.githubusercontent.com/87453033/201451647-e81fed1e-9587-4a59-a11d-12bc00578608.jpg" width="243" height="528">
+   
+  
    
    
-   
-   - Movie details page
-   
-   <img src="https://user-images.githubusercontent.com/87453033/200975589-889ef842-3b3a-4d28-a5b6-4d29ab063c80.jpg" width="243" height="528">
-   
-   
-   <img src="https://user-images.githubusercontent.com/87453033/200975699-ef3a7722-3c7e-4fd3-8239-02593144a6ca.jpg" width="243" height="528">
-   
+   <img src="https://user-images.githubusercontent.com/87453033/201451675-c5758b03-9639-40eb-b99c-ea8f13476218.jpg" width="243" height="528">
    
    
   - Similar Movie
 
-   <img src="https://user-images.githubusercontent.com/87453033/200193253-8777b7e0-04a5-49ee-aaf8-3535f5f2d839.jpg" width="243" height="528">        
+   <img src="https://user-images.githubusercontent.com/87453033/201451865-73c3c38b-4859-4e2e-b962-7db124900f95.jpg" width="243" height="528">        
    
   - Recommendation Movies
 
-   <img src="https://user-images.githubusercontent.com/87453033/200193260-d15361ee-43e1-49e6-8800-d974ee3510b2.jpg" width="243" height="528">
+   <img src="https://user-images.githubusercontent.com/87453033/201451701-41ac525e-babb-48c6-b878-7eb3dce23cbb.jpg" width="243" height="528">
 
 
  - Actor Details
 
-   <img src="https://user-images.githubusercontent.com/87453033/200976519-b92fccf7-5fa9-40e7-9fcd-2e140bc968e8.jpg" width="243" height="528">
+   <img src="https://user-images.githubusercontent.com/87453033/201451711-2463b3d0-cdfb-407a-b4e6-e3d67eff0450.jpg" width="243" height="528">
 
 
 - Search Screen
 
-   <img src="https://user-images.githubusercontent.com/87453033/200975799-aea6259f-1824-4c78-b362-70b8d5963f94.jpg" width="243" height="528">
+   <img src="https://user-images.githubusercontent.com/87453033/201451609-5a8281f1-5477-4e52-a7cd-72ace1c41264.jpg" width="243" height="528">
 
 
 

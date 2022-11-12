@@ -73,7 +73,7 @@ class CastComponent extends StatelessWidget{
 
                                 CachedNetworkImage(
                                   fit: BoxFit.fill,
-                                  imageUrl: ApiConstants.imageUrl(cast.image! ),
+                                  imageUrl: ApiConstants.imageUrl(cast.image ?? "" ),
                                   imageBuilder: (context, imageProvider) => Container(
                                     width: 150.0,
                                     height: 150.0,

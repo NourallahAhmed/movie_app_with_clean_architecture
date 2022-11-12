@@ -8,6 +8,7 @@ import 'package:movie_app/movie_module/presentation/controller/movie_bloc_state.
 import 'package:movie_app/movie_module/presentation/screens/movie_detail_screen.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/utils/api_constants.dart';
+import '../../../core/utils/assets_images.dart';
 import '../../../core/utils/enums.dart';
 
 class PopularComponent extends StatelessWidget {
@@ -81,7 +82,7 @@ class PopularComponent extends StatelessWidget {
                         child: CachedNetworkImage(
                           width: 120.0,
                           fit: BoxFit.cover,
-                          imageUrl: ApiConstants.imageUrl(movie.posterPath!),
+                          imageUrl: ApiConstants.imageUrl(movie.posterPath ?? ""),
                           placeholder: (context, url) => Shimmer.fromColors(
                             baseColor: Colors.grey[850]!,
                             highlightColor: Colors.grey[800]!,
@@ -95,7 +96,10 @@ class PopularComponent extends StatelessWidget {
                             ),
                           ),
                           errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                              SizedBox(
+                                  height: 100,
+                                  width: 150,
+                                  child: Image.asset(AssetsImages.moviePlaceholder)),
 
                         ),
                       ),

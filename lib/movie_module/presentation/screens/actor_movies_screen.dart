@@ -59,51 +59,36 @@ class ActorMoviesScreen extends StatelessWidget {
                           key: const Key('movieDetailScrollView'),
                           slivers: [
 
-                            SliverAppBar(
-                              pinned: true,
-                              backgroundColor: Colors.transparent,
-                              expandedHeight: 200.0,
-                              flexibleSpace: FlexibleSpaceBar(
-                                background: FadeIn(
-                                  duration: const Duration(milliseconds: 500),
-                                  child: ShaderMask(
-                                    shaderCallback: (rect) {
-                                      return const LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [
-                                          Colors.transparent,
-                                          Colors.black,
-                                          Colors.black,
-                                          Colors.transparent,
-                                        ],
-                                        stops: [0.0, 0.5, 1.0, 1.0],
-                                      ).createShader(
-                                        Rect.fromLTRB(0.0, 0.0, rect.width, rect.height),
-                                      );
-                                    },
-                                    blendMode: BlendMode.dstIn,
-                                    child: CachedNetworkImage(
-                                      width: MediaQuery.of(context).size.width,
-                                      imageUrl: ApiConstants.imageUrl(cast.image!),
-                                      fit: BoxFit.cover,
-                                      imageBuilder: (context, imageProvider) => Container(
+
+                            SliverPadding(
+                                padding: const  EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
+                                sliver: SliverToBoxAdapter(
+                                  child: CachedNetworkImage(
+                                    width: MediaQuery.of(context).size.width,
+                                    imageUrl: ApiConstants.imageUrl(cast.image ?? ""),
+                                    fit: BoxFit.cover,
+                                    imageBuilder: (context, imageProvider) => Container(
                                         width: 100.0,
-                                        height: 100.0,
+                                        height: 300.0,
                                         decoration: BoxDecoration(
-                                          // shape: BoxShape.circle,
+                                          shape: BoxShape.circle,
                                           image: DecorationImage(
-                                              image: imageProvider, fit: BoxFit.fill),
-                                        )),
+                                              image: imageProvider, fit: BoxFit.contain),
+                                        )
+
                                     ),
+                                    errorWidget: (context, url, error) =>
+                                        SizedBox(
+                                            height: 100,
+                                            width: 150,
+                                            child: Image.asset(AssetsImages.moviePlaceholder)),
                                   ),
-                                ),
-                              ),
+                                ), //Recomendations()
                             ),
-
+                            
+                            
+                            
                             //todo: bio
-
-
                             const ActorBioComponent(),
                             //todo: MOVIES
                             SliverPadding(

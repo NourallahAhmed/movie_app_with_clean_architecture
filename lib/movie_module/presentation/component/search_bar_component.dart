@@ -6,6 +6,26 @@ import 'package:movie_app/movie_module/presentation/controller/search_bloc.dart'
 
 class CustomSearchDelegate extends SearchDelegate {
 
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return Theme.of(context).copyWith(
+      scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBarTheme: AppBarTheme(
+        color: Theme.of(context).scaffoldBackgroundColor ,
+        actionsIconTheme: IconThemeData(
+          color: Theme.of(context).primaryColor
+
+        ),
+        iconTheme :   IconThemeData(
+              color: Theme.of(context).primaryColor
+
+        ),
+
+      )
+    );
+  }
+
 // first overwrite to
 // clear the search text
   @override
@@ -35,10 +55,11 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     print(query);
-    List<String> matchQuery = [];
+
     return BlocProvider(
-      create: (context) => serviceLocator<SearchBloc>()..add(SearchMovieEvent(query)),
-      child: search_result_component(),
+      create: (context) => serviceLocator<SearchBloc>()
+        ..add(SearchMovieEvent(query)),
+      child: const search_result_component(),
     );
   }
 
@@ -48,7 +69,7 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
 
     //todo : search for top search in api
-    // List<String> matchQuery = [];
+    List<String> matchQuery = [];
     // for (var fruit in searchTerms) {
     //   if (fruit.toLowerCase().contains(query.toLowerCase())) {
     //     matchQuery.add(fruit);

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/utils/api_constants.dart';
+import '../../../core/utils/assets_images.dart';
 import '../../../core/utils/enums.dart';
 import '../controller/movie_details_bloc.dart';
 import '../controller/movie_details_state.dart';
@@ -48,7 +49,10 @@ class Recomendations extends StatelessWidget {
                         ),
                       ),
                       errorWidget: (context, url, error) =>
-                      const Icon(Icons.error),
+                          SizedBox(
+                              height: 100,
+                              width: 150,
+                              child: Image.asset(AssetsImages.moviePlaceholder)),
                       height: 180.0,
                       fit: BoxFit.cover,
                     ),

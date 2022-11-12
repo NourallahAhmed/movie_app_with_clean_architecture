@@ -67,7 +67,7 @@ class MovieDetailContent extends StatelessWidget {
                     var movieTrailer = state.movieVedios.firstWhere((element) => element.type == "Trailer");
 
                     await Share.share(
-                      "  _  Home of Movies  _ \nLets watch ${state.moviesDetails?.title} together\n \n"
+                      "  _  ${AppString.appTitle} _ \nLets watch ${state.moviesDetails?.title} together\n \n"
                           "see the trailer : ${ApiConstants.youtubeTrailer(movieTrailer.key)}",
 
 
@@ -141,7 +141,7 @@ class MovieDetailContent extends StatelessWidget {
                                 horizontal: 8.0,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.grey[300],
+                                // color: Colors.grey[300],
                                 borderRadius: BorderRadius.circular(4.0),
                               ),
                               child: Text(
@@ -157,7 +157,7 @@ class MovieDetailContent extends StatelessWidget {
                             Container(
                               padding: EdgeInsets.all(3.0),
                               decoration: BoxDecoration(
-                              color: Colors.grey[300],
+                              // color: Colors.grey[300],
                               borderRadius: BorderRadius.circular(4.0),
                               ),
                               child: Row(
@@ -201,17 +201,11 @@ class MovieDetailContent extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(7.0),
                           decoration: BoxDecoration(
-                            color: Colors.grey[300],
+                            // color: Colors.grey[300],
                             borderRadius: BorderRadius.circular(4.0),
                           ),
                           child: Text(
                             _showDuration(state.moviesDetails!.runTime),
-                            /*style: const TextStyle(
-                              color: AppConstants.titleColor,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 1.2,
-                            ),*/
                           ),
                         ),
                         const SizedBox(height: 20.0),

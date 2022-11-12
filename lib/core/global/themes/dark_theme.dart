@@ -3,7 +3,7 @@ import 'package:movie_app/core/global/app_colors/app_dark_colors.dart';
 
 ThemeData getThemeDataDark(BuildContext context) => ThemeData(
       primaryColor: AppDarkColors.primaryColor,
-      appBarTheme: const AppBarTheme(
+      appBarTheme: const  AppBarTheme(
         color: AppDarkColors.appBarColor,
 
       ),
@@ -12,8 +12,12 @@ ThemeData getThemeDataDark(BuildContext context) => ThemeData(
             bodyColor: AppDarkColors.primaryColor, //black
             displayColor: AppDarkColors.primaryColor,
           ),
-    // primaryTextTheme: Theme.of(context).textTheme.apply(
-    //   bodyColor: AppDarkColors.appBarColor, //black
-    //   displayColor: AppDarkColors.appBarColor,
-    // ),
+
+
+      inputDecorationTheme:
+      const InputDecorationTheme(
+        hintStyle: TextStyle(color : AppDarkColors.primaryColor) ,
+        border: InputBorder.none,
+
+      ),
     );

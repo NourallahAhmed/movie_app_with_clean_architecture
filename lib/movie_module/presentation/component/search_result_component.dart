@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utils/api_constants.dart';
+import '../../../core/utils/assets_images.dart';
 import '../../../core/utils/enums.dart';
 import '../controller/search_bloc.dart';
 import '../screens/movie_detail_screen.dart';
@@ -32,8 +33,14 @@ class search_result_component extends StatelessWidget {
                       return GestureDetector(
                         child: CachedNetworkImage(
                           height: 560.0,
-                          imageUrl: ApiConstants.imageUrl(movie.posterPath!),
+                          imageUrl: ApiConstants.imageUrl(movie.posterPath ?? ""),
                           fit: BoxFit.cover,
+
+                          errorWidget: (context, url, error) =>
+                              SizedBox(
+                                  height: 100,
+                                  width: 150,
+                                  child: Image.asset(AssetsImages.moviePlaceholder)),
                         ),
                         onTap: () {
                           Navigator.pushReplacement(

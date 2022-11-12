@@ -8,6 +8,7 @@ import 'package:movie_app/movie_module/presentation/controller/seemore_movies_bl
 import 'package:readmore/readmore.dart';
 
 import '../../../core/utils/api_constants.dart';
+import '../../../core/utils/assets_images.dart';
 import '../../../core/utils/enums.dart';
 import '../component/search_bar_component.dart';
 import 'movie_detail_screen.dart';
@@ -66,8 +67,13 @@ class SeeMorePopularScreen extends StatelessWidget {
                             CachedNetworkImage(
                               height: 150.0,
                               width: 130,
-                              imageUrl: ApiConstants.imageUrl(movie.posterPath!),
+                              imageUrl: ApiConstants.imageUrl(movie.posterPath ?? ""),
                               fit: BoxFit.fill,
+                              errorWidget: (context, url, error) =>
+                                  SizedBox(
+                                      height: 100,
+                                      width: 150,
+                                      child: Image.asset(AssetsImages.moviePlaceholder)),
                             ),
                             const SizedBox(width: 15,),
                             Expanded(
@@ -113,7 +119,7 @@ class SeeMorePopularScreen extends StatelessWidget {
                                   ReadMoreText(
                                     movie.overview!,
                                     trimLines: 3,
-                                    style: const TextStyle(color: Colors.black),
+                                    // style: const TextStyle(color: Colors.black),
                                     colorClickableText: Colors.blue,
                                     trimMode: TrimMode.Line,
                                     trimCollapsedText: '...See more',
